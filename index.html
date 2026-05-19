@@ -4,558 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Кузовной ремонт 63 Регион | Самара</title>
-    <!-- Подключаем иконки FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-black: #08080a;
-            --card-black: #121218;
-            --card-hover: #181822;
-            --primary-red: #ff0e1f;
-            --accent-red: #c4000d;
+            --bg-black: #0f0f12;
+            --card-black: #1a1a22;
+            --primary-red: #e30613;
+            --accent-red: #b8040f;
             --text-white: #ffffff;
-            --text-gray: #9ba0b0;
-            --border-color: #22222d;
-            --neon-shadow: 0 0 15px rgba(255, 14, 31, 0.25);
+            --text-gray: #a0a0ab;
+            --border-color: #2a2a35;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: var(--bg-black); color: var(--text-white); line-height: 1.6; padding-bottom: 80px; }
+        header { background-color: rgba(15, 15, 18, 0.95); border-bottom: 2px solid var(--primary-red); padding: 15px 20px; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); }
+        .header-container { max-width: 600px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+        .logo span { color: var(--primary-red); }
+        .phone-link { color: var(--text-white); text-decoration: none; font-weight: 600; font-size: 15px; border: 1px solid var(--border-color); padding: 6px 12px; border-radius: 6px; transition: 0.3s; }
+        .phone-link:hover { border-color: var(--primary-red); }
+        main { max-width: 600px; margin: 0 auto; padding: 20px 15px; }
+        .hero { text-align: center; padding: 20px 0 30px 0; background: linear-gradient(180deg, rgba(227,6,19,0.1) 0%, rgba(15,15,18,0) 100%); border-radius: 12px; margin-bottom: 25px; }
+        .hero h1 { font-size: 28px; text-transform: uppercase; font-weight: 800; margin-bottom: 8px; }
+        .hero p { color: var(--text-gray); font-size: 14px; }
+        .hero-badges { display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
+        .badge { background-color: var(--card-black); padding: 6px 12px; border-radius: 20px; font-size: 12px; border: 1px solid var(--border-color); color: var(--text-gray); }
+        .badge i { color: var(--primary-red); margin-right: 5px; }
+        h2 { font-size: 18px; text-transform: uppercase; letter-spacing: 0.5px; margin: 25px 0 15px 0; display: flex; align-items: center; gap: 10px; }
+        h2::after { content: ''; flex-grow: 1; height: 1px; background-color: var(--border-color); }
 
-        body {
-            background-color: var(--bg-black);
-            color: var(--text-white);
-            line-height: 1.5;
-            padding-bottom: 90px;
-        }
-
-        /* Красивый кастомный скроллбар */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-black);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--border-color);
-            border-radius: 3px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-red);
-        }
-
-        /* Шапка сайта */
-        header {
-            background-color: rgba(8, 8, 10, 0.9);
-            border-bottom: 2px solid var(--primary-red);
-            padding: 15px 20px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        .header-container {
-            max-width: 650px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .logo span {
-            color: var(--primary-red);
-            text-shadow: var(--neon-shadow);
-        }
-
-        .phone-link {
-            color: var(--text-white);
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 14px;
-            border: 1.5px solid var(--primary-red);
-            background-color: rgba(255, 14, 31, 0.05);
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: 0.3s;
-            box-shadow: var(--neon-shadow);
-        }
-
-        .phone-link:hover {
-            background-color: var(--primary-red);
-            box-shadow: 0 0 20px rgba(255, 14, 31, 0.5);
-        }
-
-        /* Главный адаптивный контейнер */
-        main {
-            max-width: 650px;
-            margin: 0 auto;
-            padding: 20px 15px;
-        }
-
-        /* Презентация сервиса */
-        .hero {
-            text-align: center;
-            padding: 30px 20px;
-            background: linear-gradient(180deg, rgba(255, 14, 31, 0.12) 0%, rgba(8,8,10,0) 100%);
-            border-radius: 16px;
-            margin-bottom: 30px;
-            border: 1px solid rgba(255, 14, 31, 0.05);
-        }
-
-        .hero h1 {
-            font-size: 32px;
-            text-transform: uppercase;
-            font-weight: 900;
-            margin-bottom: 10px;
-            letter-spacing: -0.5px;
-        }
-
-        .hero p {
-            color: var(--text-gray);
-            font-size: 15px;
-            max-width: 450px;
-            margin: 0 auto 20px auto;
-        }
-
-        .hero-badges {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .badge {
-            background-color: var(--card-black);
-            padding: 8px 14px;
-            border-radius: 30px;
-            font-size: 13px;
-            font-weight: 600;
-            border: 1px solid var(--border-color);
-            color: var(--text-white);
-        }
-
-        .badge i {
-            color: var(--primary-red);
-            margin-right: 6px;
-        }
-
-        /* Заголовки категорий */
-        h2.section-title {
-            font-size: 18px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin: 35px 0 20px 0;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--text-white);
-        }
-
-        h2.section-title i {
-            color: var(--primary-red);
-        }
-
-        h2.section-title::after {
-            content: '';
-            flex-grow: 1;
-            height: 2px;
-            background: linear-gradient(90deg, var(--border-color) 0%, rgba(0,0,0,0) 100%);
-        }
-
-        /* КАРТОЧКА УСЛУГИ С ФОТОГРАФИЕЙ */
-        .service-card {
-            background-color: var(--card-black);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            overflow: hidden;
-            margin-bottom: 20px;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .service-card:hover {
-            border-color: rgba(255, 14, 31, 0.4);
-            background-color: var(--card-hover);
-        }
-
-        .service-card.selected {
-            border-color: var(--primary-red);
-            box-shadow: 0 10px 25px rgba(255, 14, 31, 0.15), var(--neon-shadow);
-        }
-
-        /* Область изображения */
-        .service-img-container {
+        /* --- ГАЛЕРЕЯ ИСПОЛЬЗУЮЩАЯ ОДИН ФАЙЛ (SPRITE) --- */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .gallery-item { background-color: var(--card-black); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; transition: transform 0.2s; }
+        .gallery-item:hover { transform: translateY(-5px); border-color: var(--primary-red); }
+        
+        /* Это блок, который показывает кусочек большой картинки */
+        .sprite-image {
             width: 100%;
-            height: 180px;
-            position: relative;
-            background-color: #000;
-        }
-
-        .service-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .service-card:hover .service-img-container img {
-            transform: scale(1.03);
-        }
-
-        /* Затемняющий градиент поверх фото */
-        .service-img-overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(0deg, rgba(18, 18, 24, 1) 0%, rgba(18, 18, 24, 0.2) 70%);
-        }
-
-        /* Кнопка-индикатор выбора на фото */
-        .card-select-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background-color: rgba(0, 0, 0, 0.6);
-            border: 2px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: transparent;
-            font-size: 16px;
-            transition: all 0.2s;
-            z-index: 2;
-        }
-
-        .service-card.selected .card-select-btn {
-            background-color: var(--primary-red);
-            border-color: var(--primary-red);
-            color: var(--text-white);
-            box-shadow: 0 0 10px var(--primary-red);
-        }
-
-        /* Текстовая зона карточки */
-        .service-details {
-            padding: 20px;
-        }
-
-        .service-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 8px;
-        }
-
-        .service-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-white);
-        }
-
-        .service-desc {
-            font-size: 14px;
-            color: var(--text-gray);
-            margin-bottom: 15px;
-            line-height: 1.4;
-        }
-
-        /* Цены */
-        .price-row {
-            display: flex;
-            justify-content: space-between;
-            background-color: rgba(0, 0, 0, 0.2);
-            padding: 10px 15px;
-            border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.02);
-        }
-
-        .price-item {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .price-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--text-gray);
-        }
-
-        .price-value {
-            font-size: 15px;
-            font-weight: 700;
-        }
-
-        .price-value.premium {
-            color: var(--primary-red);
-        }
-
-        /* Фиксированный нижний бар заказа */
-        .booking-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: rgba(18, 18, 24, 0.95);
-            border-top: 2px solid var(--border-color);
-            padding: 15px 20px;
-            z-index: 99;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.7);
-        }
-
-        .booking-bar-container {
-            max-width: 650px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .selected-info {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .selected-count {
-            font-size: 13px;
-            color: var(--text-gray);
-        }
-
-        .selected-count span {
-            color: var(--text-white);
-            font-weight: 800;
-        }
-
-        .btn-next {
-            background-color: var(--primary-red);
-            color: var(--text-white);
-            border: none;
-            padding: 14px 28px;
-            border-radius: 10px;
-            font-weight: 800;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: var(--neon-shadow);
-        }
-
-        .btn-next:hover {
-            background-color: var(--accent-red);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(255, 14, 31, 0.4);
-        }
-
-        .btn-next:active {
-            transform: translateY(0);
-        }
-
-        /* Элементы формы: Календарь и время */
-        .datetime-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
-
-        /* Модалка записи */
-        .modal {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(0,0,0,0.9);
-            z-index: 101;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 15px;
-            backdrop-filter: blur(8px);
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background-color: var(--card-black);
-            border: 2px solid var(--primary-red);
-            border-radius: 20px;
-            width: 100%;
-            max-width: 500px;
-            padding: 30px;
-            position: relative;
-            box-shadow: var(--neon-shadow);
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            color: var(--text-gray);
-            font-size: 24px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .close-modal:hover {
-            color: var(--primary-red);
-        }
-
-        .modal h3 {
-            font-size: 22px;
-            text-transform: uppercase;
-            font-weight: 900;
-            margin-bottom: 20px;
-            border-left: 4px solid var(--primary-red);
-            padding-left: 12px;
-        }
-
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        .form-group label {
+            height: 200px;
+            background-image: url('sprite.png'); /* Ссылка на загруженный файл */
+            background-size: 300% 200%; /* Указываем, что мозаика 3x2 */
+            background-repeat: no-repeat;
             display: block;
-            font-size: 13px;
-            color: var(--text-gray);
-            margin-bottom: 6px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        .form-control {
-            width: 100%;
-            background-color: rgba(0,0,0,0.4);
-            border: 1.5px solid var(--border-color);
-            border-radius: 10px;
-            padding: 12px 16px;
-            color: var(--text-white);
-            font-size: 15px;
-            transition: 0.25s;
-        }
+        /* Позиционирование для каждого кусочка (сдвигаем фон) */
+        .img-1 { background-position: 0% 0%; }        /* Bumper paint */
+        .img-2 { background-position: 50% 0%; }       /* Fender paint */
+        .img-3 { background-position: 100% 0%; }      /* PDR dent */
+        .img-4 { background-position: 0% 100%; }      /* Frame stapel */
+        .img-5 { background-position: 50% 100%; }     /* Polish */
+        .img-6 { background-position: 100% 100%; }    /* Install */
 
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary-red);
-            box-shadow: 0 0 10px rgba(255, 14, 31, 0.15);
-        }
+        .gallery-info { padding: 15px; }
+        .gallery-info h3 { font-size: 18px; margin-bottom: 5px; }
+        .gallery-info p { font-size: 14px; color: var(--text-gray); }
+        .gallery-info em { color: #ffcccc; font-style: normal; }
 
-        /* Стилизация календаря */
-        input[type="date"]::-webkit-calendar-picker-indicator {
-            filter: invert(1);
-            cursor: pointer;
-        }
-
-        .selected-summary {
-            background-color: rgba(0,0,0,0.5);
-            padding: 12px;
-            border-radius: 10px;
-            font-size: 13px;
-            color: var(--text-gray);
-            border: 1.5px solid var(--border-color);
-            margin-bottom: 20px;
-            max-height: 100px;
-            overflow-y: auto;
-        }
-
-        .btn-submit {
-            width: 100%;
-            background-color: var(--primary-red);
-            color: var(--text-white);
-            border: none;
-            padding: 16px;
-            border-radius: 10px;
-            font-weight: 800;
-            font-size: 16px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: 0.2s;
-            box-shadow: var(--neon-shadow);
-        }
-
-        .btn-submit:hover {
-            background-color: var(--accent-red);
-            box-shadow: 0 5px 25px rgba(255, 14, 31, 0.4);
-        }
-
-        /* Стили переключателя сегментов и подсветки цен */
-        .segment-toggle-container {
-            display: flex;
-            background-color: var(--card-black);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 4px;
-            margin: 0 auto 25px auto;
-            max-width: 100%;
-        }
-
-        .segment-btn {
-            flex: 1;
-            background: none;
-            border: none;
-            color: var(--text-gray);
-            padding: 12px 10px;
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: all 0.25s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .segment-btn.active {
-            background-color: var(--primary-red);
-            color: var(--text-white);
-            box-shadow: var(--neon-shadow);
-        }
-
-        .price-item {
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0.4;
-        }
-
-        .price-item.active-segment {
-            opacity: 1;
-            transform: scale(1.02);
-        }
+        /* Остальные стили сайта */
+        .service-card { background-color: var(--card-black); border: 1px solid var(--border-color); border-radius: 10px; padding: 15px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .service-card:active { transform: scale(0.98); }
+        .service-card.selected { border-color: var(--primary-red); box-shadow: 0 0 12px rgba(227, 6, 19, 0.2); }
+        .service-title { font-weight: 600; font-size: 16px; margin-bottom: 4px; }
+        .service-prices { display: flex; gap: 15px; font-size: 13px; color: var(--text-gray); }
+        .price-premium { color: var(--primary-red); font-weight: 600; }
+        .select-indicator { width: 24px; height: 24px; border-radius: 6px; border: 2px solid var(--border-color); display: flex; align-items: center; justify-content: center; color: transparent; flex-shrink: 0; }
+        .service-card.selected .select-indicator { background-color: var(--primary-red); border-color: var(--primary-red); color: var(--text-white); }
+        .booking-bar { position: fixed; bottom: 0; left: 0; right: 0; background-color: var(--card-black); border-top: 1px solid var(--border-color); padding: 15px; z-index: 99; }
+        .booking-bar-container { max-width: 600px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .btn-next { background-color: var(--primary-red); color: var(--text-white); border: none; padding: 12px 24px; border-radius: 8px; font-weight: 700; text-transform: uppercase; cursor: pointer; }
+        .modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.85); z-index: 101; display: none; align-items: center; justify-content: center; padding: 15px; backdrop-filter: blur(5px); }
+        .modal.active { display: flex; }
+        .modal-content { background-color: var(--card-black); border: 1px solid var(--border-color); border-radius: 12px; width: 100%; max-width: 500px; padding: 25px; position: relative; }
+        .close-modal { position: absolute; top: 15px; right: 15px; background: none; border: none; color: var(--text-gray); font-size: 20px; cursor: pointer; }
+        .form-group { margin-bottom: 15px; }
+        .form-control { width: 100%; background-color: var(--bg-black); border: 1px solid var(--border-color); border-radius: 6px; padding: 12px; color: var(--text-white); font-size: 15px; }
+        .btn-submit { width: 100%; background-color: var(--primary-red); color: var(--text-white); border: none; padding: 14px; border-radius: 8px; font-weight: 700; text-transform: uppercase; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <!-- Шапка сайта -->
     <header>
         <div class="header-container">
             <div class="logo">63 <span>Регион</span></div>
@@ -563,582 +92,76 @@
         </div>
     </header>
 
-    <!-- Основное тело -->
     <main>
         <div class="hero">
             <h1>Кузовной ремонт</h1>
-            <p>Премиальное восстановление и покраска автомобилей в Самаре по честным ценам</p>
+            <p>Профессиональное восстановление в Самаре</p>
             <div class="hero-badges">
-                <div class="badge"><i class="fa-solid fa-shield-halved"></i> Гарантия до 1 года</div>
-                <div class="badge"><i class="fa-solid fa-calendar-check"></i> Запись онлайн</div>
+                <div class="badge"><i class="fa-solid fa-shield"></i> Гарантия 1 год</div>
+                <div class="badge"><i class="fa-solid fa-camera"></i> Своя камера</div>
             </div>
         </div>
 
-        <p style="text-align: center; color: var(--text-gray); font-size: 14px; margin-bottom: 20px;">
-            <i class="fa-solid fa-circle-info" style="color: var(--primary-red);"></i> Нажмите на карточки интересующих услуг, чтобы составить заказ:
-        </p>
+        <!-- ГАЛЕРЕЯ (HTML ОБНОВЛЕН ПОД ОДИН ФАЙЛ) -->
+        <section class="gallery-container">
+            <h2><i class="fa-solid fa-camera-retro"></i> Наши Услуги в Деталях</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item"><div class="sprite-image img-1"></div><div class="gallery-info"><h3>Покраска Бампера</h3><p>Профессиональное нанесение ЛКП в камере. <em>(Разборка отдельно)</em></p></div></div>
+                <div class="gallery-item"><div class="sprite-image img-2"></div><div class="gallery-info"><h3>Покраска Крыла</h3><p>Контроль блика, глубокий блеск.</p></div></div>
+                <div class="gallery-item"><div class="sprite-image img-3"></div><div class="gallery-info"><h3>Удаление Вмятин (PDR)</h3><p>Сохранение заводского ЛКП.</p></div></div>
+                <div class="gallery-item"><div class="sprite-image img-4"></div><div class="gallery-info"><h3>Кузовной Ремонт</h3><p>Восстановление геометрии (Стапель).</p></div></div>
+                <div class="gallery-item"><div class="sprite-image img-5"></div><div class="gallery-info"><h3>Полная Полировка</h3><p>Зеркальный блеск и защита.</p></div></div>
+                <div class="gallery-item"><div class="sprite-image img-6"></div><div class="gallery-info"><h3>Арматурные Работы</h3><p>Аккуратный демонтаж и сборка.</p></div></div>
+            </div>
+        </section>
 
-        <!-- Переключатель сегментов -->
-        <div class="segment-toggle-container">
-            <button type="button" class="segment-btn active" id="btnComfort" onclick="setSegment('comfort')">
-                <i class="fa-solid fa-screwdriver-wrench"></i> Комфорт-СТО
-            </button>
-            <button type="button" class="segment-btn" id="btnPremium" onclick="setSegment('premium')">
-                <i class="fa-solid fa-gem"></i> Премиум-Детейлинг
-            </button>
-        </div>
-
-        <!-- Раздел: Покраска элементов -->
-        <h2 class="section-title"><i class="fa-solid fa-spray-can"></i> Покраска элементов</h2>
-
-        <!-- Услуга 1: Бампер -->
+        <h2><i class="fa-solid fa-file-invoice-dollar"></i> Калькулятор Цен</h2>
+        <!-- Секция калькулятора (осталась прежней) -->
         <div class="service-card" onclick="toggleService(this, 'Покраска Бампера')">
-            <div class="service-img-container">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/7469093556669942203_0" alt="Покраска бампера">
-                <div class="service-img-overlay"></div>
-                <div class="card-select-btn"><i class="fa-solid fa-check"></i></div>
-            </div>
-            <div class="service-details">
-                <div class="service-header">
-                    <div class="service-title">Бампер (передний / задний)</div>
-                </div>
-                <div class="service-desc">Устранение царапин, грунтование и нанесение лака повышенной прочности в камере. *Внимание: демонтаж и сборка элемента оплачиваются отдельно.*</div>
-                <div class="price-row">
-                    <div class="price-item comfort-price active-segment">
-                        <span class="price-label">Комфорт-СТО</span>
-                        <span class="price-value">12 000 – 16 000 ₽</span>
-                    </div>
-                    <div class="price-item premium-price" style="text-align: right;">
-                        <span class="price-label">Премиум-Детейлинг</span>
-                        <span class="price-value premium">20 000 – 27 000 ₽</span>
-                    </div>
-                </div>
-            </div>
+            <div class="service-info"><div class="service-title">Бампер</div><div class="service-prices"><span>Комфорт: 10к-14к</span><span class="price-premium">Премиум: 18к-25к</span></div></div>
+            <div class="select-indicator"><i class="fa-solid fa-check"></i></div>
         </div>
-
-        <!-- Услуга 2: Крыло -->
         <div class="service-card" onclick="toggleService(this, 'Покраска Крыла')">
-            <div class="service-img-container">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/5201220104684442208_0" alt="Покраска крыла авто">
-                <div class="service-img-overlay"></div>
-                <div class="card-select-btn"><i class="fa-solid fa-check"></i></div>
-            </div>
-            <div class="service-details">
-                <div class="service-header">
-                    <div class="service-title">Крыло (переднее / заднее)</div>
-                </div>
-                <div class="service-desc">Локальная или полная окраска крыла с компьютерным подбором тона. *Внимание: демонтаж подкрылков и оптики оплачивается отдельно.*</div>
-                <div class="price-row">
-                    <div class="price-item comfort-price active-segment">
-                        <span class="price-label">Комфорт-СТО</span>
-                        <span class="price-value">11 000 – 14 000 ₽</span>
-                    </div>
-                    <div class="price-item premium-price" style="text-align: right;">
-                        <span class="price-label">Премиум-Детейлинг</span>
-                        <span class="price-value premium">17 000 – 28 000 ₽</span>
-                    </div>
-                </div>
-            </div>
+            <div class="service-info"><div class="service-title">Крыло</div><div class="service-prices"><span>Комфорт: 9к-12к</span><span class="price-premium">Премиум: 15к-26к</span></div></div>
+            <div class="select-indicator"><i class="fa-solid fa-check"></i></div>
         </div>
-
-        <!-- Услуга 3: Дверь -->
-        <div class="service-card" onclick="toggleService(this, 'Покраска Двери')">
-            <div class="service-img-container">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/5201220104684442208_0" alt="Покраска дверей">
-                <div class="service-img-overlay"></div>
-                <div class="card-select-btn"><i class="fa-solid fa-check"></i></div>
-            </div>
-            <div class="service-details">
-                <div class="service-header">
-                    <div class="service-title">Дверь (передняя / задняя)</div>
-                </div>
-                <div class="service-desc">Окрас элемента внешней или внутренней стороны, финишная сушка. *Внимание: разборка обшивки и снятие ручек/молдингов оплачиваются отдельно.*</div>
-                <div class="price-row">
-                    <div class="price-item comfort-price active-segment">
-                        <span class="price-label">Комфорт-СТО</span>
-                        <span class="price-value">12 500 – 17 000 ₽</span>
-                    </div>
-                    <div class="price-item premium-price" style="text-align: right;">
-                        <span class="price-label">Премиум-Детейлинг</span>
-                        <span class="price-value premium">21 000 – 29 000 ₽</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Услуга 4: Капот -->
-        <div class="service-card" onclick="toggleService(this, 'Покраска Капота')">
-            <div class="service-img-container">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/7469093556669942203_0" alt="Покраска капота">
-                <div class="service-img-overlay"></div>
-                <div class="card-select-btn"><i class="fa-solid fa-check"></i></div>
-            </div>
-            <div class="service-details">
-                <div class="service-header">
-                    <div class="service-title">Капот кузова</div>
-                </div>
-                <div class="service-desc">Покраска капота с удалением сколов, финишная ИК-сушка. *Внимание: демонтаж форсунок, замков и утеплителя капота оплачивается отдельно.*</div>
-                <div class="price-row">
-                    <div class="price-item comfort-price active-segment">
-                        <span class="price-label">Комфорт-СТО</span>
-                        <span class="price-value">16 000 – 21 000 ₽</span>
-                    </div>
-                    <div class="price-item premium-price" style="text-align: right;">
-                        <span class="price-label">Премиум-Детейлинг</span>
-                        <span class="price-value premium">27 000 – 37 000 ₽</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Раздел: Покраска под толщиномер (цены х2.5) -->
-        <h2 class="section-title"><i class="fa-solid fa-sliders"></i> Окраска под толщиномер (х2.5)</h2>
-
-        <!-- Услуга 1 (Толщиномер): Бампер -->
-        <div class="service-card" onclick="toggleService(this, 'Покраска Бампера под толщиномер')">
-            <div class="service-img-container">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/7469093556669942203_0" alt="Окраска под толщиномер">
-                <div class="service-img-overlay"></div>
-                <div class="card-select-btn"><i class="fa-solid fa-check"></i></div>
-            </div>
-            <div class="service-details">
-                <div class="service-header">
-                    <div class="service-title">Бампер под заводской микрометр</div>
-                </div>
-                <div class="service-desc">Высокоточная многослойная окраска бампера. Толщина ЛКП полностью совпадает с оригинальным слоем завода-изготовителя (без выявления прибором). *Разборка отдельно.*</div>
-                <div class="price-row">
-                    <div class="price-item comfort-price active-segment">
-                        <span class="price-label">Комфорт-СТО</span>
-                        <span class="price-value">30 000 – 40 000 ₽</span>
-                    </div>
-                    <div class="price-item premium-price" style="text-align: right;">
-                        <span class="price-label">Премиум-Детейлинг</span>
-                        <span class="price-value premium">50 000 – 67 500 ₽</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Услуга 2 (Толщиномер): Крыло -->
-        <div class="service-card" onclick="toggleService(this, 'Покраска Крыла под толщиномер')">
-            <div class="service-img-container">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/5201220104684442208_0" alt="Окраска крыла под толщиномер">
-                <div class="service-img-overlay"></div>
-                <div class="card-select-btn"><i class="fa-solid fa-check"></i></div>
-            </div>
-            <div class="service-details">
-                <div class="service-header">
-                    <div class="service-title">Крыло под заводской микрометр</div>
-                </div>
-                <div class="service-desc">Ювелирная калибровка слоев грунта, базы и лака на крыле для идеального прохождения проверки толщиномером. *Демонтаж оплачивается отдельно.*</div>
-                <div class="price-row">
-                    <div class="price-item comfort-price active-segment">
-                        <span class="price-label">Комфорт-СТО</span>
-                        <span class="price-value">27 500 – 35 000 ₽</span>
-                    </div>
-                    <div class="price-item premium-price" style="text-align: right;">
-                        <span class="price-label">Премиум-Детейлинг</span>
-                        <span class="price-value premium">42 500 – 70 000 ₽</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Услуга 3 (Толщиномер): Дверь -->
-        <div class="service-card" onclick="toggleService(this, 'Покраска Двери под толщиномер')">
-            <div class="service-img-container">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/5201220104684442208_0" alt="Окраска двери под толщиномер">
-                <div class="service-img-overlay"></div>
-                <div class="card-select-btn"><i class="fa-solid fa-check"></i></div>
-            </div>
-            <div class="service-details">
-                <div class="service-header">
-                    <div class="service-title">Дверь под заводской микрометр</div>
-                </div>
-                <div class="service-desc">Сложная микропокраска дверей в соответствии с регламентом оригинального напыления марки вашего авто. *Разборка отдельно.*</div>
-                <div class="price-row">
-                    <div class="price-item comfort-price active-segment">
-                        <span class="price-label">Комфорт-СТО</span>
-                        <span class="price-value">31 250 – 42 500 ₽</span>
-                    </div>
-                    <div class="price-item premium-price" style="text-align: right;">
-                        <span class="price-label">Премиум-Детейлинг</span>
-                        <span class="price-value premium">52 500 – 72 500 ₽</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Услуга 4 (Толщиномер): Капот -->
-        <div class="service-card" onclick="toggleService(this, 'Покраска Капота под толщиномер')">
-            <div class="service-img-container">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/7469093556669942203_0" alt="Окраска капота под толщиномер">
-                <div class="service-img-overlay"></div>
-                <div class="card-select-btn"><i class="fa-solid fa-check"></i></div>
-            </div>
-            <div class="service-details">
-                <div class="service-header">
-                    <div class="service-title">Капот под заводской микрометр</div>
-                </div>
-                <div class="service-desc">Калиброванная окраска капота с двух сторон с ювелирным распределением шагрени под оригинальный вид и толщину. *Арматурные работы отдельно.*</div>
-                <div class="price-row">
-                    <div class="price-item comfort-price active-segment">
-                        <span class="price-label">Комфорт-СТО</span>
-                        <span class="price-value">40 000 – 52 500 ₽</span>
-                    </div>
-                    <div class="price-item premium-price" style="text-align: right;">
-                        <span class="price-label">Премиум-Детейлинг</span>
-                        <span class="price-value premium">67 500 – 92 500 ₽</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Раздел: Арматурные работы (Снятие и сборка) -->
-        <h2 class="section-title"><i class="fa-solid fa-screwdriver"></i> Арматурные работы (Снятие / Сборка)</h2>
-
-        <!-- Разборка: Бампер -->
-        <div class="service-card" onclick="toggleService(this, 'Арматурные работы: Бампер')">
-            <div class="service-img-container">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/17446572777861038025_0" alt="Снятие бампера">
-                <div class="service-img-overlay"></div>
-                <div class="card-select-btn"><i class="fa-solid fa-check"></i></div>
-            </div>
-            <div class="service-details">
-                <div class="service-header">
-                    <div class="service-title">Снятие, дефектовка и сборка бампера</div>
-                </div>
-                <div class="service-desc">Аккуратный демонтаж бампера, отключение парктроников, снятие ПТФ, бережное сохранение оригинальных клипс и обратный монтаж.</div>
-                <div class="price-row">
-                    <div class="price-item comfort-price active-segment">
-                        <span class="price-label">Комфорт-СТО</span>
-                        <span class="price-value">2 000 ₽</span>
-                    </div>
-                    <div class="price-item premium-price" style="text-align: right;">
-                        <span class="price-label">Премиум-Детейлинг</span>
-                        <span class="price-value premium">4 500 ₽</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Разборка: Крыло -->
-        <div class="service-card" onclick="toggleService(this, 'Арматурные работы: Крыло')">
-            <div class="service-img-container">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/5201220104684442208_0" alt="Снятие крыла">
-                <div class="service-img-overlay"></div>
-                <div class="card-select-btn"><i class="fa-solid fa-check"></i></div>
-            </div>
-            <div class="service-details">
-                <div class="service-header">
-                    <div class="service-title">Демонтаж и сборка крыла</div>
-                </div>
-                <div class="service-desc">Снятие подкрылка, брызговика, повторителя поворота, сопутствующих молдингов и выставление зазоров по заводским швам при сборке.</div>
-                <div class="price-row">
-                    <div class="price-item comfort-price active-segment">
-                        <span class="price-label">Комфорт-СТО</span>
-                        <span class="price-value">1 500 ₽</span>
-                    </div>
-                    <div class="price-item premium-price" style="text-align: right;">
-                        <span class="price-label">Премиум-Детейлинг</span>
-                        <span class="price-value premium">3 000 ₽</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Разборка: Дверь -->
-        <div class="service-card" onclick="toggleService(this, 'Арматурные работы: Дверь')">
-            <div class="service-img-container">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/5201220104684442208_0" alt="Разборка двери">
-                <div class="service-img-overlay"></div>
-                <div class="card-select-btn"><i class="fa-solid fa-check"></i></div>
-            </div>
-            <div class="service-details">
-                <div class="service-header">
-                    <div class="service-title">Арматурная разборка двери (полная)</div>
-                </div>
-                <div class="service-desc">Снятие внутренней обшивки (карты), стеклоподъемника, замка, наружной ручки, уплотнителей и зеркал заднего вида.</div>
-                <div class="price-row">
-                    <div class="price-item comfort-price active-segment">
-                        <span class="price-label">Комфорт-СТО</span>
-                        <span class="price-value">3 000 ₽</span>
-                    </div>
-                    <div class="price-item premium-price" style="text-align: right;">
-                        <span class="price-label">Премиум-Детейлинг</span>
-                        <span class="price-value premium">6 500 ₽</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Разборка: Капот -->
-        <div class="service-card" onclick="toggleService(this, 'Арматурные работы: Капот')">
-            <div class="service-img-container">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/7469093556669942203_0" alt="Снятие капота">
-                <div class="service-img-overlay"></div>
-                <div class="card-select-btn"><i class="fa-solid fa-check"></i></div>
-            </div>
-            <div class="service-details">
-                <div class="service-header">
-                    <div class="service-title">Снятие, разборка и сборка капота</div>
-                </div>
-                <div class="service-desc">Снятие теплоизоляции, форсунок омывателя, шлангов, замка капота и выставление точных симметричных зазоров при установке.</div>
-                <div class="price-row">
-                    <div class="price-item comfort-price active-segment">
-                        <span class="price-label">Комфорт-СТО</span>
-                        <span class="price-value">1 500 ₽</span>
-                    </div>
-                    <div class="price-item premium-price" style="text-align: right;">
-                        <span class="price-label">Премиум-Детейлинг</span>
-                        <span class="price-value premium">3 500 ₽</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Раздел: Рихтовка и кузовные работы -->
-        <h2 class="section-title"><i class="fa-solid fa-hammer"></i> Рихтовка и геометрия</h2>
-
-        <!-- Услуга 5: Рихтовка -->
-        <div class="service-card" onclick="toggleService(this, 'Рихтовка вмятины')">
-            <div class="service-img-container">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/13230521713524742540_0" alt="Ремонт вмятин">
-                <div class="service-img-overlay"></div>
-                <div class="card-select-btn"><i class="fa-solid fa-check"></i></div>
-            </div>
-            <div class="service-details">
-                <div class="service-header">
-                    <div class="service-title">Рихтовка мелкой вмятины</div>
-                </div>
-                <div class="service-desc">Выправление мелких неровностей споттером с полным восстановлением ребер жесткости.</div>
-                <div class="price-row">
-                    <div class="price-item comfort-price active-segment">
-                        <span class="price-label">Комфорт-СТО</span>
-                        <span class="price-value">от 5 000 ₽</span>
-                    </div>
-                    <div class="price-item premium-price" style="text-align: right;">
-                        <span class="price-label">Премиум-Детейлинг</span>
-                        <span class="price-value premium">от 7 500 ₽</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Услуга 6: PDR -->
-        <div class="service-card" onclick="toggleService(this, 'Удаление вмятин PDR')">
-            <div class="service-img-container">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/13230521713524742540_0" alt="PDR вмятины">
-                <div class="service-img-overlay"></div>
-                <div class="card-select-btn"><i class="fa-solid fa-check"></i></div>
-            </div>
-            <div class="service-details">
-                <div class="service-header">
-                    <div class="service-title">Беспокрасочное удаление (PDR)</div>
-                </div>
-                <div class="service-desc">Ювелирное выправление вмятин без повреждения заводского лакокрасочного покрытия.</div>
-                <div class="price-row">
-                    <div class="price-item comfort-price active-segment">
-                        <span class="price-label">Комфорт-СТО</span>
-                        <span class="price-value">от 4 500 ₽</span>
-                    </div>
-                    <div class="price-item premium-price" style="text-align: right;">
-                        <span class="price-label">Премиум-Детейлинг</span>
-                        <span class="price-value premium">от 7 000 ₽</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Услуга 7: Стапель -->
-        <div class="service-card" onclick="toggleService(this, 'Стапельные работы')">
-            <div class="service-img-container">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/17446572777861038025_0" alt="Стапельные работы">
-                <div class="service-img-overlay"></div>
-                <div class="card-select-btn"><i class="fa-solid fa-check"></i></div>
-            </div>
-            <div class="service-details">
-                <div class="service-header">
-                    <div class="service-title">Восстановление геометрии (Стапель)</div>
-                </div>
-                <div class="service-desc">Установка на платформенный стапель, устранение перекосов силовой структуры по заводским точкам.</div>
-                <div class="price-row">
-                    <div class="price-item comfort-price active-segment">
-                        <span class="price-label">Комфорт-СТО</span>
-                        <span class="price-value">от 10 000 ₽</span>
-                    </div>
-                    <div class="price-item premium-price" style="text-align: right;">
-                        <span class="price-label">Премиум-Детейлинг</span>
-                        <span class="price-value premium">от 20 000 ₽</span>
-                    </div>
-                </div>
-            </div>
+        <div class="service-card" onclick="toggleService(this, 'Полировка Кузова')">
+            <div class="service-info"><div class="service-title">Полная Полировка</div><div class="service-prices"><span>Комфорт: от 14к</span><span class="price-premium">Премиум: от 35к</span></div></div>
+            <div class="select-indicator"><i class="fa-solid fa-check"></i></div>
         </div>
     </main>
 
-    <!-- Закрепленная кнопка внизу страницы -->
-    <div class="booking-bar">
-        <div class="booking-bar-container">
-            <div class="selected-info">
-                <div class="selected-count">Выбрано услуг: <span id="count">0</span></div>
-            </div>
-            <button class="btn-next" onclick="openModal()">Записаться</button>
-        </div>
-    </div>
+    <div class="booking-bar"><div class="booking-bar-container"><div class="selected-count">Выбрано услуг: <span id="count">0</span></div><button class="btn-next" onclick="openModal()">Записаться</button></div></div>
 
-    <!-- Модальное окно с интерактивным календарем -->
     <div class="modal" id="bookingModal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeModal()">&times;</button>
             <h3>Запись на осмотр</h3>
-            
-            <form action="https://api.web3forms.com/submit" method="POST" id="tgForm">
-                <!-- Ключ Web3Forms (вставьте его вместо YOUR_ACCESS_KEY_HERE) -->
+            <form action="https://api.web3forms.com/submit" method="POST">
                 <input type="hidden" name="access_key" value="4f286a75-1aae-49c0-beb2-cf985dfca1f8">
-                <input type="hidden" name="subject" value="Новая запись на осмотр [63 Регион]">
-                <input type="hidden" name="from_name" value="Сайт 63Регион">
-                
-                <!-- Поле выбранных услуг -->
+                <input type="hidden" name="subject" value="Новая запись на осмотр кузова [63 Регион]">
                 <input type="hidden" name="Выбранные_услуги" id="hiddenServices">
-
-                <div class="form-group">
-                    <label>Ваш заказ:</label>
-                    <div class="selected-summary" id="servicesSummary">Осмотр кузова мастером-оценщиком</div>
-                </div>
-
-                <!-- Сегмент обслуживания (клиент может изменить выбор перед отправкой) -->
-                <div class="form-group">
-                    <label for="segmentSelect">Класс обслуживания *</label>
-                    <select name="Класс_обслуживания" id="segmentSelect" class="form-control" onchange="syncSegmentFromModal(this.value)" required>
-                        <option value="comfort">Комфорт-СТО (Оптимальный баланс)</option>
-                        <option value="premium">Премиум-Детейлинг (Максимальное качество)</option>
-                    </select>
-                </div>
-
-                <!-- Интерактивный Календарь + Время -->
-                <div class="datetime-grid">
-                    <div class="form-group">
-                        <label for="date">Дата осмотра *</label>
-                        <input type="date" name="Желаемая_дата" id="date" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="time">Время визита *</label>
-                        <select name="Желаемое_время" id="time" class="form-control" required>
-                            <option value="09:00">09:00</option>
-                            <option value="11:00">11:00</option>
-                            <option value="13:00">13:00</option>
-                            <option value="15:00">15:00</option>
-                            <option value="17:00">17:00</option>
-                            <option value="19:00">19:00</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="name">Ваше имя *</label>
-                    <input type="text" name="Имя_Клиента" id="name" class="form-control" placeholder="Иван" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">Ваш телефон *</label>
-                    <input type="tel" name="Телефон" id="phone" class="form-control" placeholder="+7 (927) 000-00-00" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="car">Марка автомобиля</label>
-                    <input type="text" name="Автомобиль" id="car" class="form-control" placeholder="Рено Логан, 2018 г.">
-                </div>
-
-                <button type="submit" class="btn-submit">Подтвердить запись</button>
+                <div class="form-group"><input type="text" name="Имя" class="form-control" placeholder="Ваше имя *" required></div>
+                <div class="form-group"><input type="tel" name="Телефон" class="form-control" placeholder="Телефон *" required></div>
+                <div class="form-group"><input type="text" name="Автомобиль" class="form-control" placeholder="Марка авто"></div>
+                <button type="submit" class="btn-submit">Отправить</button>
             </form>
         </div>
     </div>
 
-    <!-- Интерактивный скрипт -->
     <script>
         let selectedServices = [];
-        let currentSegment = 'comfort';
-
-        // Устанавливаем минимальную дату для календаря (сегодняшний день)
-        const today = new Date().toISOString().split('T')[0];
-        document.getElementById('date').min = today;
-        document.getElementById('date').value = today; // По умолчанию ставим сегодня
-
-        // Функция переключения сегментов (Комфорт / Премиум)
-        function setSegment(segment) {
-            currentSegment = segment;
-            
-            // Переключаем активные кнопки на главном экране
-            if (segment === 'comfort') {
-                document.getElementById('btnComfort').classList.add('active');
-                document.getElementById('btnPremium').classList.remove('active');
-                document.getElementById('segmentSelect').value = 'comfort';
-            } else {
-                document.getElementById('btnComfort').classList.remove('active');
-                document.getElementById('btnPremium').classList.add('active');
-                document.getElementById('segmentSelect').value = 'premium';
-            }
-
-            // Обновляем визуальную подсветку цен в карточках
-            document.querySelectorAll('.comfort-price').forEach(el => {
-                if (segment === 'comfort') el.classList.add('active-segment');
-                else el.classList.remove('active-segment');
-            });
-            document.querySelectorAll('.premium-price').forEach(el => {
-                if (segment === 'premium') el.classList.add('active-segment');
-                else el.classList.remove('active-segment');
-            });
-        }
-
-        // Синхронизация выбора сегмента из модального окна обратно на страницу
-        function syncSegmentFromModal(val) {
-            setSegment(val);
-        }
-
         function toggleService(card, serviceName) {
             card.classList.toggle('selected');
-            
-            if (card.classList.contains('selected')) {
-                selectedServices.push(serviceName);
-            } else {
-                selectedServices = selectedServices.filter(item => item !== serviceName);
-            }
-            
-            // Обновляем счетчик
+            if (card.classList.contains('selected')) { selectedServices.push(serviceName); } else { selectedServices = selectedServices.filter(item => item !== serviceName); }
             document.getElementById('count').innerText = selectedServices.length;
         }
-
         function openModal() {
-            const summaryDiv = document.getElementById('servicesSummary');
             const hiddenInput = document.getElementById('hiddenServices');
-            
-            // Заранее устанавливаем значение селектора в модалке
-            document.getElementById('segmentSelect').value = currentSegment;
-
-            if (selectedServices.length > 0) {
-                summaryDiv.innerText = selectedServices.join(', ');
-                hiddenInput.value = selectedServices.join(', ');
-            } else {
-                summaryDiv.innerText = "Общая дефектовка кузова и расчет стоимости";
-                hiddenInput.value = "Общая дефектовка кузова";
-            }
-            
+            hiddenInput.value = selectedServices.length > 0 ? selectedServices.join(', ') : "Общий осмотр кузова";
             document.getElementById('bookingModal').classList.add('active');
         }
-
-        function closeModal() {
-            document.getElementById('bookingModal').classList.remove('remove');
-            document.getElementById('bookingModal').classList.remove('active');
-        }
-
-        // Закрытие при клике мимо модалки
-        window.onclick = function(event) {
-            const modal = document.getElementById('bookingModal');
-            if (event.target == modal) {
-                modal.classList.remove('active');
-            }
-        }
+        function closeModal() { document.getElementById('bookingModal').classList.remove('active'); }
     </script>
 </body>
-</html>
 </html>
