@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кузовной ремонт 63 Регион | Самара</title>
+    <!-- Подключаем иконки FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-black: #0f0f12;
+            --card-black: #1a1a22;
+            --primary-red: #e30613;
+            --accent-red: #b8040f;
+            --text-white: #ffffff;
+            --text-gray: #a0a0ab;
+            --border-color: #2a2a35;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--text-white);
+            line-height: 1.6;
+        }
+
+        /* Хедер */
+        header {
+            background-color: rgba(15, 15, 18, 0.95);
+            border-bottom: 2px solid var(--primary-red);
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-container {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--primary-red);
+        }
+
+        .phone-link {
+            color: var(--text-white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            border: 1px solid var(--border-color);
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        .phone-link:hover {
+            border-color: var(--primary-red);
+        }
+
+        /* Главный контейнер (мобильный формат) */
+        main {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px 15px 80px 15px;
+        }
+
+        /* Визитка */
+        .hero {
+            text-align: center;
+            padding: 20px 0 30px 0;
+            background: linear-gradient(180deg, rgba(227,6,19,0.1) 0%, rgba(15,15,18,0) 100%);
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            font-size: 28px;
+            text-transform: uppercase;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .badge {
+            background-color: var(--card-black);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            border: 1px solid var(--border-color);
+            color: var(--text-gray);
+        }
+
+        .badge i {
+            color: var(--primary-red);
+            margin-right: 5px;
+        }
+
+        /* Разделы прайса */
+        h2 {
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 25px 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background-color: var(--border-color);
+        }
+
+        /* Карточки услуг */
+        .service-card {
+            background-color: var(--card-black);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.2s ease-in-out;
+            cursor: pointer;
+        }
+
+        .service-card:active {
+            transform: scale(0.98);
+        }
+
+        .service-card.selected {
+            border-color: var(--primary-red);
+            box-shadow: 0 0 12px rgba(227, 6, 19, 0.2);
+        }
+
+        .service-info {
+            flex-grow: 1;
+            padding-right: 15px;
+        }
+
+        .service-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .service-prices {
+            display: flex;
+            gap: 15px;
+            font-size: 13px;
+        }
+
+        .price-comfort {
+            color: var(--text-gray);
+        }
+
+        .price-premium {
+            color: var(--primary-red);
+            font-weight: 600;
+        }
+
+        .select-indicator {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            border: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: transparent;
+            transition: 0.2s;
+            flex-shrink: 0;
+        }
+
+        .service-card.selected .select-indicator {
+            background-color: var(--primary-red);
+            border-color: var(--primary-red);
+            color: var(--text-white);
+        }
+
+        /* Нижняя плашка фиксации выбора */
+        .booking-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--card-black);
+            border-top: 1px solid var(--border-color);
+            padding: 15px;
+            z-index: 99;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+        }
+
+        .booking-bar-container {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .selected-count {
+            font-size: 14px;
+            color: var(--text-gray);
+        }
+
+        .selected-count span {
+            color: var(--text-white);
+            font-weight: 700;
+        }
+
+        .btn-next {
+            background-color: var(--primary-red);
+            color: var(--text-white);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 15px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-next:hover {
+            background-color: var(--accent-red);
+        }
+
+        /* Модальное окно формы записи */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.85);
+            z-index: 101;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--card-black);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            width: 100%;
+            max-width: 500px;
+            padding: 25px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .modal h3 {
+            font-size: 20px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            color: var(--text-white);
+            border-left: 3px solid var(--primary-red);
+            padding-left: 10px;
+        }
+
+        /* Форма ввода */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            color: var(--text-gray);
+            margin-bottom: 5px;
+        }
+
+        .form-control {
+            width: 100%;
+            background-color: var(--bg-black);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px;
+            color: var(--text-white);
+            font-size: 15px;
+            transition: 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-red);
+        }
+
+        .selected-summary {
+            background-color: var(--bg-black);
+            padding: 10px;
+            border-radius: 6px;
+            max-height: 100px;
+            overflow-y: auto;
+            font-size: 13px;
+            color: var(--text-gray);
+            border: 1px solid var(--border-color);
+            margin-bottom: 15px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: var(--primary-red);
+            color: var(--text-white);
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--accent-red);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Хедер -->
+    <header>
+        <div class="header-container">
+            <div class="logo">63 <span>Регион</span></div>
+            <a href="tel:+79277010070" class="phone-link"><i class="fa-solid fa-phone"></i> Позвонить</a>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main>
+        <div class="hero">
+            <h1>Кузовной ремонт</h1>
+            <p>Профессиональное восстановление и покраска авто в Самаре</p>
+            <div class="hero-badges">
+                <div class="badge"><i class="fa-solid fa-shield"></i> Гарантия от 1 года</div>
+                <div class="badge"><i class="fa-solid fa-camera"></i> Своя камера</div>
+            </div>
+        </div>
+
+        <p style="text-align: center; color: var(--text-gray); font-size: 14px; margin-bottom: 10px;">
+            Выделите нужные услуги пальцем и нажмите кнопку снизу:
+        </p>
+
+        <!-- Раздел 1: Покраска -->
+        <h2><i class="fa-solid fa-spray-can"></i> Покраска элементов</h2>
+        <div class="service-card" onclick="toggleService(this, 'Покраска Бампера')">
+            <div class="service-info">
+                <div class="service-title">Бампер (передний / задний)</div>
+                <div class="service-prices">
+                    <span class="price-comfort">Комфорт: 10к-14к ₽</span>
+                    <span class="price-premium">Премиум: 18к-25к ₽</span>
+                </div>
+            </div>
+            <div class="select-indicator"><i class="fa-solid fa-check"></i></div>
+        </div>
+
+        <div class="service-card" onclick="toggleService(this, 'Покраска Крыла')">
+            <div class="service-info">
+                <div class="service-title">Крыло (переднее / заднее)</div>
+                <div class="service-prices">
+                    <span class="price-comfort">Комфорт: 9к-12к ₽</span>
+                    <span class="price-premium">Премиум: 15к-26к ₽</span>
+                </div>
+            </div>
+            <div class="select-indicator"><i class="fa-solid fa-check"></i></div>
+        </div>
+
+        <div class="service-card" onclick="toggleService(this, 'Покраска Двери')">
+            <div class="service-info">
+                <div class="service-title">Дверь</div>
+                <div class="service-prices">
+                    <span class="price-comfort">Комфорт: 10.5к-15к ₽</span>
+                    <span class="price-premium">Премиум: 19к-27к ₽</span>
+                </div>
+            </div>
+            <div class="select-indicator"><i class="fa-solid fa-check"></i></div>
+        </div>
+
+        <div class="service-card" onclick="toggleService(this, 'Покраска Капота')">
+            <div class="service-info">
+                <div class="service-title">Капот</div>
+                <div class="service-prices">
+                    <span class="price-comfort">Комфорт: 14к-19к ₽</span>
+                    <span class="price-premium">Премиум: 25к-35к ₽</span>
+                </div>
+            </div>
+            <div class="select-indicator"><i class="fa-solid fa-check"></i></div>
+        </div>
+
+        <!-- Раздел 2: Рихтовка -->
+        <h2><i class="fa-solid fa-hammer"></i> Рихтовка и ремонт</h2>
+        <div class="service-card" onclick="toggleService(this, 'Рихтовка вмятины')">
+            <div class="service-info">
+                <div class="service-title">Рихтовка мелкой вмятины</div>
+                <div class="service-prices">
+                    <span class="price-comfort">Комфорт: от 3 000 ₽</span>
+                    <span class="price-premium">Премиум: от 5 500 ₽</span>
+                </div>
+            </div>
+            <div class="select-indicator"><i class="fa-solid fa-check"></i></div>
+        </div>
+
+        <div class="service-card" onclick="toggleService(this, 'Удаление вмятин PDR')">
+            <div class="service-info">
+                <div class="service-title">Удаление вмятин без покраски (PDR)</div>
+                <div class="service-prices">
+                    <span class="price-comfort">Комфорт: от 2 500 ₽</span>
+                    <span class="price-premium">Премиум: от 5 000 ₽</span>
+                </div>
+            </div>
+            <div class="select-indicator"><i class="fa-solid fa-check"></i></div>
+        </div>
+
+        <div class="service-card" onclick="toggleService(this, 'Стапельные работы')">
+            <div class="service-info">
+                <div class="service-title">Восстановление геометрии (Стапель)</div>
+                <div class="service-prices">
+                    <span class="price-comfort">Комфорт: от 8 000 ₽</span>
+                    <span class="price-premium">Премиум: от 18 000 ₽</span>
+                </div>
+            </div>
+            <div class="select-indicator"><i class="fa-solid fa-check"></i></div>
+        </div>
+    </main>
+
+    <!-- Нижний бар фиксации выбора -->
+    <div class="booking-bar">
+        <div class="booking-bar-container">
+            <div class="selected-count">Выбрано услуг: <span id="count">0</span></div>
+            <button class="btn-next" onclick="openModal()">Записаться</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно записи -->
+    <div class="modal" id="bookingModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <h3>Запись на осмотр</h3>
+            
+            <!-- Форма отправки сообщений на почту -->
+            <form action="https://api.web3forms.com/submit" method="POST" id="tgForm">
+                <!-- ВСТАВЬ СВОЙ КЛЮЧ ОТ WEB3FORMS НИЖЕ В VALUE -->
+                <input type="hidden" name="access_key" value="4f286a75-1aae-49c0-beb2-cf985dfca1f8">
+                <input type="hidden" name="subject" value="Новая запись на осмотр кузова [63 Регион]">
+                <input type="hidden" name="from_name" value="Сайт Автосервиса">
+                
+                <!-- Поле, куда автоматически запишутся выбранные услуги -->
+                <input type="hidden" name="Выбранные_услуги" id="hiddenServices">
+
+                <div class="form-group">
+                    <label>Выбранные позиции:</label>
+                    <div class="selected-summary" id="servicesSummary">Ничего не выбрано. Вы можете продолжить, мастер уточнит детали на месте.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Ваше имя *</label>
+                    <input type="text" name="Имя" id="name" class="form-control" placeholder="Иван Иванович" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Телефон для связи *</label>
+                    <input type="tel" name="Телефон" id="phone" class="form-control" placeholder="+7 (999) 000-00-00" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="car">Марка и модель авто</label>
+                    <input type="text" name="Автомобиль" id="car" class="form-control" placeholder="Рено Логан, 2018г">
+                </div>
+
+                <button type="submit" class="btn-submit">Отправить заявку</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Логика работы сайта -->
+    <script>
+        let selectedServices = [];
+
+        function toggleService(card, serviceName) {
+            card.classList.toggle('selected');
+            
+            if (card.classList.contains('selected')) {
+                selectedServices.push(serviceName);
+            } else {
+                selectedServices = selectedServices.filter(item => item !== serviceName);
+            }
+            
+            // Обновляем счетчик на кнопке
+            document.getElementById('count').innerText = selectedServices.length;
+        }
+
+        function openModal() {
+            const summaryDiv = document.getElementById('servicesSummary');
+            const hiddenInput = document.getElementById('hiddenServices');
+            
+            if (selectedServices.length > 0) {
+                summaryDiv.innerText = selectedServices.join(', ');
+                hiddenInput.value = selectedServices.join(', ');
+            } else {
+                summaryDiv.innerText = "Услуги не выбраны (Общий осмотр кузова)";
+                hiddenInput.value = "Общий осмотр кузова / Оценка стоимости по факту";
+            }
+            
+            document.getElementById('bookingModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('bookingModal').classList.remove('active');
+        }
+
+        // Закрытие модалки при клике на темную область вокруг нее
+        window.onclick = function(event) {
+            const modal = document.getElementById('bookingModal');
+            if (event.target == modal) {
+                modal.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>
