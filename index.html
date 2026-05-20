@@ -18,21 +18,17 @@
         body { background-color: var(--bg-black); color: var(--text-white); padding: 20px; line-height: 1.6; }
         .container { max-width: 600px; margin: 0 auto; }
         
-        /* Header */
         header { text-align: center; margin-bottom: 30px; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; }
         h1 { color: var(--primary-red); font-size: 28px; }
 
-        /* AI Section */
         .ai-section { background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 12px; margin-bottom: 30px; }
         .upload-area { border: 2px dashed var(--border-color); padding: 30px; text-align: center; cursor: pointer; border-radius: 10px; transition: 0.3s; }
         .upload-area:hover { border-color: var(--primary-red); }
         #fileInput { display: none; }
         #previewImage { max-width: 100%; margin-top: 15px; display: none; border-radius: 8px; }
         
-        /* Result */
         .result-box { margin-top: 20px; padding: 20px; background: rgba(227, 6, 19, 0.1); border: 1px solid var(--primary-red); border-radius: 8px; display: none; }
         
-        /* Price List Section */
         .price-section { background: var(--card-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); }
         table { width: 100%; border-collapse: collapse; margin-top: 15px; }
         th, td { text-align: left; padding: 12px; border-bottom: 1px solid var(--border-color); }
@@ -48,14 +44,13 @@
         <p>Кузовной ремонт в Самаре</p>
     </header>
 
-    <!-- AI Оценка -->
     <div class="ai-section">
         <h3>ИИ Оценка повреждений</h3>
-        <p style="color: var(--text-gray); font-size: 14px; margin-bottom: 15px;">Загрузите фото, чтобы получить предварительный расчет стоимости.</p>
+        <p style="color: var(--text-gray); font-size: 14px; margin-bottom: 15px;">Загрузите фото для расчета стоимости.</p>
         
         <div class="upload-area" onclick="document.getElementById('fileInput').click()">
             <i class="fa-solid fa-cloud-arrow-up" style="font-size: 40px; color: var(--primary-red);"></i>
-            <p>Нажмите для выбора фото</p>
+            <p>Выбрать фото</p>
             <input type="file" id="fileInput" accept="image/*" onchange="handleFileUpload(this)">
             <img id="previewImage" alt="Preview">
         </div>
@@ -68,7 +63,6 @@
         </div>
     </div>
 
-    <!-- Прайс-лист -->
     <div class="price-section">
         <h3>Базовый прайс-лист</h3>
         <table>
@@ -83,29 +77,22 @@
 </div>
 
 <script>
-    // --- НАСТРОЙКИ ---
-    // !!! Вставьте ваш реальный ключ OpenAI здесь !!!
     const OPENAI_API_KEY = "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"; 
 
     async function handleFileUpload(input) {
         const file = input.files[0];
+        if (!file) return;
+
         const status = document.getElementById('status');
         const resultBox = document.getElementById('resultBox');
+        resultBox.style.display = 'none';
         
-        // Показ превью
-        const reader = new FileReader();
-        reader.onload = (e) => { 
-            document.getElementById('previewImage').src = e.target.result; 
-            document.getElementById('previewImage').style.display = 'block'; 
-        };
-        reader.readAsDataURL(file);
-
-        status.innerText = "Анализируем фото, подождите...";
+        status.innerText = "Подготовка изображения...";
         
-        // Кодируем фото в Base64
-        const base64 = await toBase64(file);
-
         try {
+            const base64 = await resizeAndCompressImage(file);
+            status.innerText = "Анализируем фото (GPT-4o)...";
+
             const response = await fetch("https://api.openai.com/v1/chat/completions", {
                 method: "POST",
                 headers: {
@@ -117,7 +104,7 @@
                     messages: [{
                         role: "user",
                         content: [
-                            { type: "text", text: "Ты — эксперт автосервиса '63 Регион' в Самаре. Посмотри на фото. Оцени повреждение кузова. Верни ответ ТОЛЬКО в формате JSON: { 'work': 'название работы', 'price': 'примерная цена в рублях' }. Если повреждений нет, напиши это." },
+                            { type: "text", text: "Ты эксперт автосервиса. Оцени повреждение на фото. Верни JSON: { \"work\": \"название\", \"price\": \"цена\" }. Если повреждений нет, напиши JSON с work: 'Повреждений не обнаружено'." },
                             { type: "image_url", image_url: { url: base64 } }
                         ]
                     }],
@@ -126,24 +113,41 @@
             });
 
             const data = await response.json();
+            if (!response.ok) throw new Error(data.error?.message || "Ошибка API");
+
             const result = JSON.parse(data.choices[0].message.content);
-            
             status.innerText = "Готово!";
             resultBox.style.display = 'block';
             document.getElementById('workName').innerText = "Результат: " + result.work;
             document.getElementById('priceText').innerText = result.price;
 
         } catch (err) {
-            status.innerText = "Ошибка: не удалось связаться с ИИ. Проверьте API ключ.";
-            console.error(err);
+            status.innerText = "Ошибка: " + err.message;
+            console.error("Детали ошибки:", err);
         }
     }
 
-    function toBase64(file) {
+    // Сжатие изображения для корректной передачи в API
+    function resizeAndCompressImage(file) {
         return new Promise((resolve) => {
             const reader = new FileReader();
             reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result);
+            reader.onload = (event) => {
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const MAX_WIDTH = 800;
+                    const scaleSize = MAX_WIDTH / img.width;
+                    canvas.width = MAX_WIDTH;
+                    canvas.height = img.height * scaleSize;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    document.getElementById('previewImage').src = canvas.toDataURL('image/jpeg', 0.7);
+                    document.getElementById('previewImage').style.display = 'block';
+                    resolve(canvas.toDataURL('image/jpeg', 0.7));
+                };
+                img.src = event.target.result;
+            };
         });
     }
 </script>
