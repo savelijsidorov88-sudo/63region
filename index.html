@@ -42,7 +42,6 @@
             min-height: 100vh;
         }
 
-        /* Контейнер */
         .wrapper {
             width: 100%;
             max-width: 480px;
@@ -81,7 +80,7 @@
             font-weight: 500;
         }
 
-        /* Карточки/Блоки */
+        /* Карточки */
         .card {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -114,7 +113,7 @@
             line-height: 1.4;
         }
 
-        /* Зона загрузки фото */
+        /* Загрузка фото */
         .upload-zone {
             border: 2px dashed var(--border);
             border-radius: 14px;
@@ -132,7 +131,6 @@
         .upload-zone:hover, .upload-zone.dragover {
             border-color: var(--primary);
             background: rgba(227, 6, 19, 0.03);
-            box-shadow: inset 0 0 15px rgba(227, 6, 19, 0.05);
         }
 
         .upload-zone i {
@@ -141,22 +139,10 @@
             transition: color 0.3s;
         }
 
-        .upload-zone:hover i {
-            color: var(--primary);
-        }
+        .upload-zone:hover i { color: var(--primary); }
+        .upload-zone p { font-size: 14px; font-weight: 500; }
+        .upload-zone span { font-size: 12px; color: var(--text-muted); }
 
-        .upload-zone p {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-main);
-        }
-
-        .upload-zone span {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
-        /* Превью изображения */
         .preview-container {
             position: relative;
             width: 100%;
@@ -177,180 +163,123 @@
 
         .remove-btn {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 10px; right: 10px;
             background: rgba(0, 0, 0, 0.7);
-            border: none;
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.2s;
+            border: none; color: white;
+            width: 32px; height: 32px; border-radius: 50%;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
             backdrop-filter: blur(4px);
         }
 
-        .remove-btn:hover {
-            background: var(--primary);
-        }
+        .remove-btn:hover { background: var(--primary); }
 
-        /* Поля ввода формы */
-        .form-group {
-            margin-bottom: 16px;
-        }
-
+        /* Поля ввода */
+        .form-group { margin-bottom: 16px; }
         .form-group label {
-            display: block;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-muted);
-            margin-bottom: 6px;
+            display: block; font-size: 12px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px;
+            color: var(--text-muted); margin-bottom: 6px;
         }
 
         .input-control {
-            width: 100%;
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 14px 16px;
-            color: var(--text-main);
-            font-size: 15px;
-            transition: all 0.3s ease;
+            width: 100%; background: var(--bg-input); border: 1px solid var(--border);
+            border-radius: 10px; padding: 14px 16px; color: var(--text-main); font-size: 15px;
         }
 
-        .input-control:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 10px var(--glow);
-        }
+        .input-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 10px var(--glow); }
+        textarea.input-control { resize: none; height: 90px; }
 
-        textarea.input-control {
-            resize: none;
-            height: 90px;
-        }
-
-        /* Кнопки */
         .btn {
-            width: 100%;
-            background: var(--primary);
-            color: var(--text-main);
-            border: none;
-            border-radius: 12px;
-            padding: 16px;
-            font-size: 16px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            width: 100%; background: var(--primary); color: var(--text-main); border: none;
+            border-radius: 12px; padding: 16px; font-size: 16px; font-weight: 600;
+            cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px;
             box-shadow: 0 4px 15px rgba(227, 6, 19, 0.3);
         }
 
-        .btn:hover {
-            background: var(--primary-hover);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(227, 6, 19, 0.4);
+        .btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
+        .btn:disabled { background: #2c2c35; color: #636366; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        /* --- СТИЛЬ ПРАЙС-ЛИСТА С ФОТО --- */
+        .price-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 15px;
         }
 
-        .btn:disabled {
-            background: #2c2c35;
-            color: #636366;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
+        .price-item {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
         }
 
-        /* Прайс-лист */
-        .price-table {
+        .price-item:hover {
+            transform: translateY(-2px);
+            border-color: #3a3a45;
+        }
+
+        .price-image {
             width: 100%;
-            border-collapse: collapse;
-            margin-top: 8px;
+            height: 160px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border);
         }
 
-        .price-row {
+        .price-content {
+            padding: 16px;
+        }
+
+        .price-header {
             display: flex;
             justify-content: space-between;
-            padding: 14px 0;
-            border-bottom: 1px solid var(--border);
-            font-size: 14px;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 8px;
         }
 
-        .price-row:last-child {
-            border-bottom: none;
-        }
-
-        .price-name {
-            font-weight: 500;
+        .price-title-text {
+            font-size: 16px;
+            font-weight: 600;
             color: var(--text-main);
         }
 
-        .price-value {
-            font-weight: 600;
+        .price-tag {
+            font-size: 15px;
+            font-weight: 700;
             color: var(--primary);
+            white-space: nowrap;
+            background: rgba(227, 6, 19, 0.1);
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(227, 6, 19, 0.2);
         }
 
-        /* Экраны состояний (Загрузка / Успех) */
+        .price-description {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* Экраны состояний */
         .overlay-status {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg-card);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 30px;
-            text-align: center;
-            z-index: 10;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
+            background: var(--bg-card); display: flex; flex-direction: column;
+            align-items: center; justify-content: center; padding: 30px; text-align: center;
+            z-index: 10; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
         }
 
-        .overlay-status.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid var(--border);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-        }
-
-        .success-icon {
-            font-size: 56px;
-            color: #34c759;
-            margin-bottom: 20px;
-            animation: scaleUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .status-title {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 800;
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-
-        .status-desc {
-            font-size: 14px;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
+        .overlay-status.active { opacity: 1; pointer-events: auto; }
+        .spinner { width: 50px; height: 50px; border: 3px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
+        .success-icon { font-size: 56px; color: #34c759; margin-bottom: 20px; }
+        .status-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 20px; margin-bottom: 10px; }
+        .status-desc { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
 
         @keyframes spin { to { transform: rotate(360deg); } }
-        @keyframes scaleUp { from { transform: scale(0); } to { transform: scale(1); } }
     </style>
 </head>
 <body>
@@ -363,15 +292,15 @@
         <p>кузовной центр & детейлинг</p>
     </header>
 
-    <!-- Основная форма оценки -->
+    <!-- Форма отправки -->
     <div class="card" id="mainCard">
         
-        <!-- Окно отправки (Экран загрузки/Успеха) -->
+        <!-- Экран статуса отправки -->
         <div class="overlay-status" id="statusOverlay">
             <div id="statusContent">
                 <div class="spinner"></div>
                 <div class="status-title">Отправка данных...</div>
-                <div class="status-desc">Сжимаем медиафайлы и формируем защищенный пакет для мастера.</div>
+                <div class="status-desc">Сжимаем фото и формируем защищенный пакет для мастера.</div>
             </div>
         </div>
 
@@ -379,89 +308,115 @@
             <i class="fa-solid fa-camera-retro"></i>
             <span>Расчет по фото</span>
         </div>
-        <div class="card-subtitle">Загрузите фото дефекта. Мастер кузовного цеха произведет дефектовку и ответит вам в течение 24 часов.</div>
+        <div class="card-subtitle">Загрузите фото дефекта. Наш мастер рассчитает точную стоимость и свяжется с вами в течение 24 часов.</div>
 
         <form id="estimationForm">
-            <!-- Скрытый токен Web3Forms для отправки на почту -->
-            <!-- Замените "YOUR_ACCESS_KEY_HERE" на ваш ключ, когда получите его на web3forms.com -->
+            <!-- Токен Web3Forms для бесплатной отправки писем (web3forms.com) -->
             <input type="hidden" name="access_key" value="4f286a75-1aae-49c0-beb2-cf985dfca1f8">
-            <input type="hidden" name="subject" value="Новая заявка на оценку ремонта - 63 Регион">
-            <input type="hidden" name="from_name" value="Сайт Оценки">
+            <input type="hidden" name="subject" value="Новая заявка на кузовной ремонт - 63 Регион">
 
-            <!-- Поле загрузки -->
+            <!-- Загрузка файлов -->
             <div class="form-group">
                 <div class="upload-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
-                    <i class="fa-solid fa-cloud-arrow-up" id="uploadIcon"></i>
-                    <p id="uploadText">Сделать или выбрать фото</p>
-                    <span>Поддерживаются форматы JPG, PNG</span>
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <p>Сделать или выбрать фото</p>
+                    <span>Смартфон автоматически предложит включить камеру</span>
                 </div>
-                <!-- Атрибут accept позволяет сразу вызывать камеру на смартфонах -->
                 <input type="file" id="fileInput" accept="image/*" style="display: none;">
                 
                 <div class="preview-container" id="previewContainer">
-                    <img id="imagePreview" src="#" alt="Превью повреждения">
+                    <img id="imagePreview" src="#" alt="Превью дефекта">
                     <button type="button" class="remove-btn" id="removeImageBtn">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Данные клиента -->
+            <!-- Данные -->
             <div class="form-group">
                 <label>Ваше имя</label>
                 <input type="text" name="name" class="input-control" placeholder="Александр" required>
             </div>
 
             <div class="form-group">
-                <label>Телефон для связи (Telegram / WhatsApp)</label>
+                <label>Телефон (WhatsApp / Telegram)</label>
                 <input type="tel" name="phone" class="input-control" placeholder="+7 (999) 000-00-00" required>
             </div>
 
             <div class="form-group">
-                <label>Марка и модель автомобиля</label>
-                <input type="text" name="car" class="input-control" placeholder="BMW 5er (G30) или Гранта" required>
+                <label>Марка и модель авто</label>
+                <input type="text" name="car" class="input-control" placeholder="Лада Веста / Toyota Camry" required>
             </div>
 
             <div class="form-group">
-                <label>Комментарий мастера (необязательно)</label>
-                <textarea name="comment" class="input-control" placeholder="Например: царапина глубокая, вмятина без заломов..."></textarea>
+                <label>Что случилось? (Описание)</label>
+                <textarea name="comment" class="input-control" placeholder="Например: въехали во дворе в крыло, краска содрана, нужна покраска и рихтовка..."></textarea>
             </div>
 
             <button type="submit" class="btn" id="submitBtn" disabled>
-                <i class="fa-solid fa-paper-plane"></i> Отправить на дефектовку
+                <i class="fa-solid fa-paper-plane"></i> Отправить мастеру
             </button>
         </form>
     </div>
 
-    <!-- Премиальный Прайс-лист -->
+    <!-- ПРЕМИАЛЬНЫЙ ПРАЙС-ЛИСТ С ФОТОГРАФИЯМИ И ОПИСАНИЕМ -->
     <div class="card">
         <div class="card-title">
-            <i class="fa-solid fa-list-ul"></i>
-            <span>Ориентировочный прайс</span>
+            <i class="fa-solid fa-images"></i>
+            <span>Наши услуги и цены</span>
         </div>
-        <div class="card-subtitle">Финальная стоимость зависит от площади повреждения и геометрии детали.</div>
+        <div class="card-subtitle">Ниже представлены базовые тарифы кузовного цеха на основные виды работ.</div>
         
-        <div class="price-table">
-            <div class="price-row">
-                <span class="price-name">Покраска элемента (с материалом)</span>
-                <span class="price-value">от 9 500 ₽</span>
+        <div class="price-list">
+            
+            <!-- Элемент 1 -->
+            <div class="price-item">
+                <img class="price-image" src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&q=80&w=600" alt="Покраска элемента">
+                <div class="price-content">
+                    <div class="price-header">
+                        <span class="price-title-text">Высокоточная покраска элемента</span>
+                        <span class="price-tag">от 9 500 ₽</span>
+                    </div>
+                    <p class="price-description">Полная покраска детали в профессиональной камере. В стоимость включены премиальный лак, компьютерный подбор эмали цвет-в-цвет и подготовка элемента.</p>
+                </div>
             </div>
-            <div class="price-row">
-                <span class="price-name">Ремонт вмятин без покраски (PDR)</span>
-                <span class="price-value">от 2 000 ₽</span>
+
+            <!-- Элемент 2 -->
+            <div class="price-item">
+                <img class="price-image" src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&q=80&w=600" alt="Удаление вмятин PDR">
+                <div class="price-content">
+                    <div class="price-header">
+                        <span class="price-title-text">Удаление вмятин без покраски (PDR)</span>
+                        <span class="price-tag">от 2 000 ₽</span>
+                    </div>
+                    <p class="price-description">Выправление вмятин специальным инструментом с сохранением заводского лакокрасочного покрытия. Идеально для следов от града, легких парковочных повреждений.</p>
+                </div>
             </div>
-            <div class="price-row">
-                <span class="price-name">Локальный ремонт сколов</span>
-                <span class="price-value">от 1 500 ₽</span>
+
+            <!-- Элемент 3 -->
+            <div class="price-item">
+                <img class="price-image" src="https://images.unsplash.com/photo-1625047509168-a7026f36de04?auto=format&fit=crop&q=80&w=600" alt="Рихтовка и стапель">
+                <div class="price-content">
+                    <div class="price-header">
+                        <span class="price-title-text">Сложная рихтовка и стапель</span>
+                        <span class="price-tag">от 12 000 ₽</span>
+                    </div>
+                    <p class="price-description">Восстановление сложной геометрии кузова после серьезных ДТП. Вытягивание лонжеронов, восстановление контрольных заводских точек на профессиональном стапеле.</p>
+                </div>
             </div>
-            <div class="price-row">
-                <span class="price-name">Стапельные работы / Геометрия</span>
-                <span class="price-value">от 12 000 ₽</span>
+
+            <!-- Элемент 4 -->
+            <div class="price-item">
+                <img class="price-image" src="https://images.unsplash.com/photo-1507136566006-cfc505b114fc?auto=format&fit=crop&q=80&w=600" alt="Детейлинг полировка">
+                <div class="price-content">
+                    <div class="price-header">
+                        <span class="price-title-text">Абразивная детейлинг-полировка</span>
+                        <span class="price-tag">от 15 000 ₽</span>
+                    </div>
+                    <p class="price-description">Многоэтапное удаление мелких царапин, паутины и помутнений ЛКП. Возвращает кузову глубокий зеркальный блеск нового автомобиля.</p>
+                </div>
             </div>
-            <div class="price-row">
-                <span class="price-name">Глубокая полировка кузова</span>
-                <span class="price-value">от 15 000 ₽</span>
-            </div>
+
         </div>
     </div>
 
@@ -478,31 +433,12 @@
     const statusOverlay = document.getElementById('statusOverlay');
     const statusContent = document.getElementById('statusContent');
 
-    let compressedImageBase64 = null; // Здесь будет храниться пожатое фото
+    let compressedImageBase64 = null;
 
-    // Обработка выбора файла (камера или галерея)
     fileInput.addEventListener('change', function() {
-        if (this.files && this.files[0]) {
-            handleImage(this.files[0]);
-        }
+        if (this.files && this.files[0]) handleImage(this.files[0]);
     });
 
-    // Drag and Drop события для десктопа
-    ['dragenter', 'dragover'].forEach(eventName => {
-        dropZone.addEventListener(eventName, (e) => { e.preventDefault(); dropZone.classList.add('dragover'); }, false);
-    });
-    ['dragleave', 'drop'].forEach(eventName => {
-        dropZone.addEventListener(eventName, (e) => { e.preventDefault(); dropZone.classList.remove('dragover'); }, false);
-    });
-    dropZone.addEventListener('drop', (e) => {
-        const dt = e.dataTransfer;
-        const files = dt.files;
-        if (files.length && files[0].type.startsWith('image/')) {
-            handleImage(files[0]);
-        }
-    });
-
-    // Обработка, сжатие и генерация превью
     function handleImage(file) {
         dropZone.style.display = 'none';
         previewContainer.style.display = 'block';
@@ -513,31 +449,23 @@
             const img = new Image();
             img.src = event.target.result;
             img.onload = function() {
-                // Сжатие изображения через Canvas до разумных мобильных размеров
                 const canvas = document.createElement('canvas');
-                const MAX_WIDTH = 1000; // Оптимально для почты и оценки
+                const MAX_WIDTH = 1000; 
                 const scaleSize = MAX_WIDTH / img.width;
                 
-                if(img.width > MAX_WIDTH) {
-                    canvas.width = MAX_WIDTH;
-                    canvas.height = img.height * scaleSize;
-                } else {
-                    canvas.width = img.width;
-                    canvas.height = img.height;
-                }
+                canvas.width = img.width > MAX_WIDTH ? MAX_WIDTH : img.width;
+                canvas.height = img.width > MAX_WIDTH ? img.height * scaleSize : img.height;
                 
                 const ctx = canvas.getContext('2d');
                 ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                 
-                // Получаем base64 в формате JPEG с качеством 75%
                 compressedImageBase64 = canvas.toDataURL('image/jpeg', 0.75);
                 imagePreview.src = compressedImageBase64;
-                submitBtn.disabled = false; // Разрешаем отправку формы
+                submitBtn.disabled = false;
             }
         };
     }
 
-    // Удаление выбранного фото
     removeImageBtn.addEventListener('click', function(e) {
         e.stopPropagation();
         fileInput.value = '';
@@ -547,19 +475,14 @@
         submitBtn.disabled = true;
     });
 
-    // Отправка формы
+    // Отправка формы на почту
     estimationForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-        
-        // Включаем экран загрузки
         statusOverlay.classList.add('active');
         
         const formData = new FormData(estimationForm);
-        
-        // Переводим данные в JSON структуру для отправки
         const object = Object.fromEntries(formData);
         
-        // Если пользователь добавил пожатое фото, прикрепляем текстовую ссылку/данные
         if (compressedImageBase64) {
             object["Photo_Attachment_Base64"] = compressedImageBase64; 
         }
@@ -567,36 +490,29 @@
         const json = JSON.stringify(object);
         const apiKey = formData.get("access_key");
 
-        // ДЕМО-РЕЖИМ (если ключ не заменен)
+        // ДЕМО-РЕЖИМ для проверки верстки (если ключ не изменен)
         if (apiKey === "YOUR_ACCESS_KEY_HERE" || apiKey === "") {
             setTimeout(() => {
-                showSuccessScreen("Включен демонстрационный режим! Для реальной отправки вставьте ваш ключ от Web3Forms в HTML код.");
+                showSuccessScreen("Включен ДЕМО-режим! Сайт работает идеально. Чтобы заявки начали приходить к вам на Email, вставьте ключ из личного кабинета web3forms.com.");
             }, 2000);
             return;
         }
 
-        // РЕАЛЬНАЯ ОТПРАВКА НА ПОЧТУ
+        // РЕАЛЬНАЯ ОТПРАВКА НА EMAIL
         try {
             const response = await fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                 body: json
             });
-            
             const result = await response.json();
-            
             if (response.status === 200) {
-                showSuccessScreen("Мастер кузовного цеха свяжется с вами по указанному номеру телефона для уточнения деталей ремонта.");
+                showSuccessScreen("Заявка успешно доставлена мастеру кузовного цеха. Мы свяжемся с вами в течение суток.");
                 estimationForm.reset();
-                compressedImageBase64 = null;
             } else {
                 throw new Error(result.message || "Ошибка сервера");
             }
         } catch (error) {
-            console.error(error);
             showErrorScreen(error.message);
         }
     });
@@ -606,7 +522,7 @@
             <i class="fa-solid fa-circle-check success-icon"></i>
             <div class="status-title">Заявка принята!</div>
             <div class="status-desc" style="margin-bottom: 20px;">${description}</div>
-            <button class="btn" onclick="closeOverlay()" style="background: #2c2c35; box-shadow:none;">Вернуться назад</button>
+            <button class="btn" onclick="closeOverlay()" style="background: #2c2c35; box-shadow:none;">Вернуться</button>
         `;
     }
 
@@ -614,21 +530,19 @@
         statusContent.innerHTML = `
             <i class="fa-solid fa-circle-xmark success-icon" style="color:var(--primary);"></i>
             <div class="status-title">Ошибка отправки</div>
-            <div class="status-desc" style="margin-bottom: 20px;">${errMsg}. Проверьте соединение с интернетом или настройки ключа.</div>
+            <div class="status-desc" style="margin-bottom: 20px;">${errMsg}</div>
             <button class="btn" onclick="closeOverlay()">Попробовать снова</button>
         `;
     }
 
     function closeOverlay() {
         statusOverlay.classList.remove('active');
-        // Возвращаем дефолтный спиннер обратно после закрытия
         setTimeout(() => {
             statusContent.innerHTML = `
                 <div class="spinner"></div>
                 <div class="status-title">Отправка данных...</div>
-                <div class="status-desc">Сжимаем медиафайлы и формируем защищенный пакет для мастера.</div>
+                <div class="status-desc">Сжимаем фото и формируем защищенный пакет для мастера.</div>
             `;
-            // Сбрасываем превью
             fileInput.value = '';
             compressedImageBase64 = null;
             previewContainer.style.display = 'none';
