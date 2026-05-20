@@ -3,902 +3,567 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>63 РЕГИОН | Кузовное ателье & Детейлинг</title>
-    <!-- Шрифты и Иконки -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <title>63 Регион | Кузовной Ремонт & Интеллектуальный Расчет</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
         :root {
-            --bg-main: #0c0c0e;
-            --bg-card: #14141c;
-            --bg-input: #1c1c24;
-            --primary: #e30613;
-            --primary-hover: #b8050f;
-            --text-main: #ffffff;
-            --text-muted: #8e8e93;
-            --border: #2c2c35;
-            --glow: rgba(227, 6, 19, 0.2);
+            --bg-black: #0c0c0e;
+            --card-bg: #16161c;
+            --bg-input: #0e0e12;
+            --primary-red: #e30613;
+            --glow-red: rgba(227, 6, 19, 0.4);
+            --text-white: #ffffff;
+            --text-gray: #9ca3af;
+            --border-color: #2a2a35;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-            -webkit-tap-highlight-color: transparent;
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            -webkit-tap-highlight-color: transparent; 
         }
-
-        body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
+        
+        body { 
+            background-color: var(--bg-black); 
+            color: var(--text-white); 
+            line-height: 1.5; 
+            padding-bottom: 90px; 
         }
-
-        .wrapper {
-            width: 100%;
-            max-width: 480px;
-            padding: 24px 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
+        
+        header { 
+            background-color: rgba(12, 12, 14, 0.95); 
+            border-bottom: 1px solid var(--border-color); 
+            padding: 15px 20px; 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            backdrop-filter: blur(10px); 
         }
+        
+        .header-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+        .logo span { color: var(--primary-red); }
+        .phone-btn { background: transparent; color: var(--text-white); text-decoration: none; font-weight: 600; font-size: 14px; border: 1px solid var(--border-color); padding: 8px 16px; border-radius: 6px; transition: 0.3s; }
+        .phone-btn:hover { border-color: var(--primary-red); box-shadow: 0 0 10px var(--glow-red); }
 
-        /* Шапка */
-        header {
-            text-align: center;
-            padding: 20px 0 10px 0;
-        }
+        main { max-width: 1200px; margin: 0 auto; padding: 25px 15px; display: flex; flex-direction: column; gap: 30px; }
 
-        header h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 900;
-            font-size: 36px;
-            letter-spacing: 2px;
-            color: var(--text-main);
-            text-transform: uppercase;
-        }
-
-        header h1 span {
-            color: var(--primary);
-            text-shadow: 0 0 15px var(--glow);
-        }
-
-        header p {
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: var(--text-muted);
-            margin-top: 4px;
-            font-weight: 500;
-        }
-
-        /* Карточки */
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        /* ИНТЕЛЛЕКТУАЛЬНЫЙ БЛОК: ОЦЕНКА ПО ФОТО */
+        .ai-card {
+            background: linear-gradient(135deg, #1c1c24 0%, var(--card-bg) 100%);
+            border: 2px dashed #3a3a4a;
             position: relative;
-            overflow: hidden;
         }
-
-        .card-title {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 800;
-            font-size: 18px;
-            margin-bottom: 8px;
-            text-transform: uppercase;
+        .ai-card.file-loaded {
+            border: 1px solid var(--border-color);
+        }
+        
+        .upload-section {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 10px;
-        }
-
-        .card-title i { color: var(--primary); }
-        .card-subtitle { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.4; }
-
-        /* Загрузка фото */
-        .upload-zone {
-            border: 2px dashed var(--border);
-            border-radius: 14px;
-            padding: 30px 20px;
+            justify-content: center;
+            padding: 35px 20px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            background: rgba(255,255,255,0.01);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            transition: 0.3s;
             gap: 12px;
         }
-
-        .upload-zone:hover, .upload-zone.dragover {
-            border-color: var(--primary);
-            background: rgba(227, 6, 19, 0.03);
+        .upload-section:hover {
+            background: rgba(227, 6, 19, 0.02);
+            border-color: var(--primary-red);
         }
+        .upload-section i { font-size: 42px; color: var(--text-gray); transition: 0.3s; }
+        .upload-section:hover i { color: var(--primary-red); text-shadow: 0 0 10px var(--glow-red); }
+        .upload-section h4 { font-size: 18px; font-weight: 700; }
+        .upload-section p { font-size: 13px; color: var(--text-gray); }
 
-        .upload-zone i { font-size: 32px; color: var(--text-muted); transition: color 0.3s; }
-        .upload-zone:hover i { color: var(--primary); }
-        .upload-zone p { font-size: 14px; font-weight: 500; }
-        .upload-zone span { font-size: 12px; color: var(--text-muted); }
-
-        .preview-container {
+        .preview-wrapper {
+            display: none;
             position: relative;
             width: 100%;
-            margin-top: 15px;
-            display: none;
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
-            border: 1px solid var(--border);
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
         }
-
-        #imagePreview {
+        .preview-wrapper img {
             width: 100%;
-            display: block;
             height: auto;
-            max-height: 250px;
+            max-height: 300px;
             object-fit: cover;
+            display: block;
         }
-
-        .remove-btn {
-            position: absolute;
-            top: 10px; right: 10px;
-            background: rgba(0, 0, 0, 0.7);
-            border: none; color: white;
-            width: 32px; height: 32px; border-radius: 50%;
-            cursor: pointer; display: flex; align-items: center; justify-content: center;
-            backdrop-filter: blur(4px);
-        }
-        .remove-btn:hover { background: var(--primary); }
-
-        /* Поля ввода */
-        .form-group { margin-bottom: 16px; }
-        .form-group label {
-            display: block; font-size: 12px; font-weight: 600;
-            text-transform: uppercase; letter-spacing: 1px;
-            color: var(--text-muted); margin-bottom: 6px;
-        }
-
-        .input-control {
-            width: 100%; background: var(--bg-input); border: 1px solid var(--border);
-            border-radius: 10px; padding: 14px 16px; color: var(--text-main); font-size: 15px;
-        }
-        .input-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 10px var(--glow); }
-        textarea.input-control { resize: none; height: 90px; }
-
-        .btn {
-            width: 100%; background: var(--primary); color: var(--text-main); border: none;
-            border-radius: 12px; padding: 16px; font-size: 16px; font-weight: 600;
-            cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px;
-            box-shadow: 0 4px 15px rgba(227, 6, 19, 0.3);
-        }
-        .btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
-        .btn:disabled { background: #2c2c35; color: #636366; cursor: not-allowed; transform: none; box-shadow: none; }
-
-        /* --- ТОЧНАЯ ПОДГОНКА СПРАЙТА (CSS SPRITE) --- */
-        .price-list { display: flex; flex-direction: column; gap: 20px; margin-top: 15px; }
         
-        .price-item {
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s ease;
-        }
-        .price-item:hover { transform: translateY(-2px); border-color: #3a3a45; }
-
-        .price-image-sprite {
-            width: 100%;
-            height: 250px; /* Фиксированная высота кадра как в оригинале */
-            background-image: url('sprite.png');
-            background-repeat: no-repeat;
-            background-size: 100% auto; /* Растягивает картинку под ширину контейнера */
-            border-bottom: 1px solid var(--border);
-        }
-
-        /* Позиционирование по вертикали в пикселях с шагом в 250px */
-        .img-paint  { background-position: 0 0; }
-        .img-pdr    { background-position: 0 -250px; }
-        .img-frame  { background-position: 0 -500px; }
-        .img-polish { background-position: 0 -750px; }
-
-        .price-content { padding: 16px; }
-        .price-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
-        .price-title-text { font-size: 16px; font-weight: 600; color: var(--text-main); }
-        .price-tag {
-            font-size: 15px; font-weight: 700; color: var(--primary); white-space: nowrap;
-            background: rgba(227, 6, 19, 0.1); padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(227, 6, 19, 0.2);
-        }
-        .price-description { font-size: 13px; color: var(--text-muted); line-height: 1.4; }
-
-        /* Окна статусов */
-        .overlay-status {
+        /* Сканирующая линия ИИ */
+        .ai-scanner-line {
+            display: none;
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg-card); display: flex; flex-direction: column;
-            align-items: center; justify-content: center; padding: 30px; text-align: center;
-            z-index: 10; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(to bottom, transparent, var(--primary-red));
+            box-shadow: 0 0 15px var(--primary-red);
+            animation: scan 2s linear infinite;
+            z-index: 5;
         }
-        .overlay-status.active { opacity: 1; pointer-events: auto; }
-        .spinner { width: 50px; height: 50px; border: 3px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
-        .success-icon { font-size: 56px; color: #34c759; margin-bottom: 20px; }
-        .status-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 20px; margin-bottom: 10px; }
-        .status-desc { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+        @keyframes scan {
+            0% { top: 0%; }
+            50% { top: 100%; }
+            100% { top: 0%; }
+        }
 
-        @keyframes spin { to { transform: rotate(360deg); } }
+        .remove-photo-btn {
+            position: absolute;
+            top: 15px; right: 15px;
+            background: rgba(0,0,0,0.8);
+            border: 1px solid var(--border-color);
+            color: #fff; width: 36px; height: 36px;
+            border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; z-index: 10;
+        }
+        .remove-photo-btn:hover { background: var(--primary-red); }
+
+        /* Переключатель сегментов */
+        .segment-wrapper { display: flex; justify-content: center; }
+        .segment-toggle { display: flex; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 30px; padding: 5px; }
+        .segment-btn { background: transparent; border: none; color: var(--text-gray); padding: 10px 24px; font-size: 15px; font-weight: 600; border-radius: 25px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .segment-btn.active { background: var(--primary-red); color: var(--text-white); box-shadow: 0 0 15px var(--glow-red); }
+
+        /* Сетка прайса */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        
+        .service-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; position: relative; }
+        .service-card:hover { border-color: #4a4a5a; transform: translateY(-3px); }
+        .service-card.selected { border-color: var(--primary-red); box-shadow: 0 0 20px var(--glow-red); }
+        .service-card.selected::after { content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; top: 10px; right: 10px; background: var(--primary-red); color: #fff; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+
+        /* Точная нарезка оригинального спрайта */
+        .card-img { width: 100%; height: 180px; background-image: url('sprite.png'); background-size: 300% 200%; background-repeat: no-repeat; border-bottom: 1px solid var(--border-color); }
+        .img-bumper { background-position: 0% 0%; }
+        .img-fender { background-position: 50% 0%; }
+        .img-pdr { background-position: 100% 0%; }
+        .img-stapel { background-position: 0% 100%; }
+        .img-polish { background-position: 50% 100%; }
+        .img-armature { background-position: 100% 100%; }
+
+        .card-content { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        .card-title { font-size: 18px; font-weight: 700; margin-bottom: 5px; }
+        .card-warning { font-size: 12px; color: #ff6b6b; margin-bottom: 15px; font-style: italic; }
+        
+        .card-features { list-style: none; margin-bottom: 20px; flex-grow: 1; }
+        .card-features li { font-size: 13px; color: var(--text-gray); margin-bottom: 6px; position: relative; padding-left: 15px; }
+        .card-features li::before { content: '•'; color: var(--primary-red); position: absolute; left: 0; top: 0; font-weight: bold; }
+
+        .price-box { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px; border: 1px solid var(--border-color); }
+        .price-label { font-size: 11px; color: var(--text-gray); text-transform: uppercase; letter-spacing: 0.5px; }
+        .price-value { font-size: 18px; font-weight: 700; color: var(--text-white); margin-top: 2px; }
+        
+        .price-comfort, .price-premium { display: none; }
+        body[data-segment="comfort"] .price-comfort { display: block; }
+        body[data-segment="premium"] .price-premium { display: block; }
+
+        /* Закрепленная панель снизу */
+        .booking-bar { position: fixed; bottom: 0; left: 0; right: 0; background-color: rgba(22, 22, 28, 0.95); border-top: 1px solid var(--primary-red); padding: 15px; z-index: 99; backdrop-filter: blur(10px); }
+        .booking-bar-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .selected-info { font-size: 14px; color: var(--text-gray); }
+        .selected-info span { color: var(--text-white); font-weight: 700; font-size: 18px; margin-left: 5px; }
+        .btn-main { background-color: var(--primary-red); color: var(--text-white); border: none; padding: 12px 28px; border-radius: 8px; font-weight: 700; font-size: 15px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(227, 6, 19, 0.3); }
+        .btn-main:hover { background-color: #c0040f; transform: translateY(-2px); }
+
+        /* Модальное окно оформления */
+        .modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.85); z-index: 101; display: none; align-items: center; justify-content: center; padding: 15px; backdrop-filter: blur(5px); }
+        .modal.active { display: flex; }
+        .modal-content { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; width: 100%; max-width: 500px; padding: 25px; position: relative; max-height: 90vh; overflow-y: auto; }
+        .close-modal { position: absolute; top: 15px; right: 15px; background: none; border: none; color: var(--text-gray); font-size: 24px; cursor: pointer; }
+        .modal h3 { font-size: 22px; margin-bottom: 20px; border-left: 3px solid var(--primary-red); padding-left: 10px; }
+        
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group.full { grid-column: 1 / -1; }
+        .form-label { display: block; font-size: 12px; color: var(--text-gray); margin-bottom: 5px; text-transform: uppercase; }
+        .form-control { width: 100%; background-color: var(--bg-black); border: 1px solid var(--border-color); border-radius: 6px; padding: 12px; color: var(--text-white); font-size: 15px; transition: 0.3s; }
+        .form-control:focus { outline: none; border-color: var(--primary-red); }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-black); }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-gray); }
+
+        @media (max-width: 600px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .segment-btn { padding: 10px 15px; font-size: 13px; }
+        }
     </style>
 </head>
-<body>
-
-<div class="wrapper">
-
-    <!-- Шапка бренда -->
-    <header>
-        <h1>63<span>регион</span></h1>
-        <p>кузовной центр & детейлинг</p>
-    </header>
-
-    <!-- Основная премиум-форма оценки -->
-    <div class="card" id="mainCard">
-        <div class="overlay-status" id="statusOverlay">
-            <div id="statusContent">
-                <div class="spinner"></div>
-                <div class="status-title">Отправка данных...</div>
-                <div class="status-desc">Сжимаем фото и формируем защищенный пакет для мастера.</div>
-            </div>
-        </div>
-
-        <div class="card-title">
-            <i class="fa-solid fa-camera-retro"></i>
-            <span>Расчет по фото</span>
-        </div>
-        <div class="card-subtitle">Загрузите фото дефекта. Наш мастер рассчитает точную стоимость и свяжется с вами в течение 24 часов.</div>
-
-        <form id="estimationForm">
-            <!-- Токен Web3Forms для бесплатной работы формы отправки писем (web3forms.com) -->
-            <input type="hidden" name="access_key" value="4f286a75-1aae-49c0-beb2-cf985dfca1f8">
-            <input type="hidden" name="subject" value="Новая заявка на кузовной ремонт - 63 Регион">
-
-            <!-- Поле добавления медиафайла -->
-            <div class="form-group">
-                <div class="upload-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
-                    <i class="fa-solid fa-cloud-arrow-up"></i>
-                    <p>Сделать или выбрать фото</p>
-                    <span>Автоматически откроет камеру на вашем телефоне</span>
-                </div>
-                <input type="file" id="fileInput" accept="image/*" style="display: none;">
-                
-                <div class="preview-container" id="previewContainer">
-                    <img id="imagePreview" src="#" alt="Превью дефекта">
-                    <button type="button" class="remove-btn" id="removeImageBtn">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Данные клиента -->
-            <div class="form-group">
-                <label>Ваше имя</label>
-                <input type="text" name="name" class="input-control" placeholder="Александр" required>
-            </div>
-
-            <div class="form-group">
-                <label>Телефон (WhatsApp / Telegram)</label>
-                <input type="tel" name="phone" class="input-control" placeholder="+7 (999) 000-00-00" required>
-            </div>
-
-            <div class="form-group">
-                <label>Марка и модель авто</label>
-                <input type="text" name="car" class="input-control" placeholder="Лада Веста / Toyota Camry" required>
-            </div>
-
-            <div class="form-group">
-                <label>Что случилось? (Описание)</label>
-                <textarea name="comment" class="input-control" placeholder="Например: вмятина на крыле, краска не повреждена..."></textarea>
-            </div>
-
-            <button type="submit" class="btn" id="submitBtn" disabled>
-                <i class="fa-solid fa-paper-plane"></i> Отправить мастеру
-            </button>
-        </form>
-    </div>
-
-    <!-- Интерактивный прайс из файла sprite.png -->
-    <div class="card">
-        <div class="card-title">
-            <i class="fa-solid fa-images"></i>
-            <span>Наши услуги и цены</span>
-        </div>
-        <div class="card-subtitle">Ниже представлены базовые тарифы кузовного цеха на основные виды работ.</div>
-        
-        <div class="price-list">
-            
-            <!-- Услуга 1 -->
-            <div class="price-item">
-                <div class="price-image-sprite img-paint"></div>
-                <div class="price-content">
-                    <div class="price-header">
-                        <span class="price-title-text">Высокоточная покраска элемента</span>
-                        <span class="price-tag">от 9 500 ₽</span>
-                    </div>
-                    <p class="price-description">Полная покраска детали в профессиональной камере. В стоимость включены премиальный лак, компьютерный подбор эмали цвет-в-цвет и подготовка элемента.</p>
-                </div>
-            </div>
-
-            <!-- Услуга 2 -->
-            <div class="price-item">
-                <div class="price-image-sprite img-pdr"></div>
-                <div class="price-content">
-                    <div class="price-header">
-                        <span class="price-title-text">Удаление вмятин без покраски (PDR)</span>
-                        <span class="price-tag">от 2 000 ₽</span>
-                    </div>
-                    <p class="price-description">Выправление вмятин специальным инструментом с сохранением заводского лакокрасочного покрытия. Идеально для следов от града, легких парковочных повреждений.</p>
-                </div>
-            </div>
-
-            <!-- Услуга 3 -->
-            <div class="price-item">
-                <div class="price-image-sprite img-frame"></div>
-                <div class="price-content">
-                    <div class="price-header">
-                        <span class="price-title-text">Сложная рихтовка и стапель</span>
-                        <span class="price-tag">от 12 000 ₽</span>
-                    </div>
-                    <p class="price-description">Восстановление сложной геометрии кузова после серьезных ДТП. Вытягивание лонжеронов, восстановление контрольных заводских точек на профессиональном стапеле.</p>
-                </div>
-            </div>
-
-            <!-- Услуга 4 -->
-            <div class="price-item">
-                <div class="price-image-sprite img-polish"></div>
-                <div class="price-content">
-                    <div class="price-heade<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>63 РЕГИОН | Кузовное ателье & Детейлинг</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        :root {
-            --bg-main: #0c0c0e;
-            --bg-card: #14141c;
-            --bg-input: #1c1c24;
-            --primary: #e30613;
-            --primary-hover: #b8050f;
-            --text-main: #ffffff;
-            --text-muted: #8e8e93;
-            --border: #2c2c35;
-            --glow: rgba(227, 6, 19, 0.2);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .wrapper {
-            width: 100%;
-            max-width: 480px;
-            padding: 24px 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        /* Шапка */
-        header {
-            text-align: center;
-            padding: 20px 0 10px 0;
-        }
-
-        header h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 900;
-            font-size: 36px;
-            letter-spacing: 2px;
-            color: var(--text-main);
-            text-transform: uppercase;
-        }
-
-        header h1 span {
-            color: var(--primary);
-            text-shadow: 0 0 15px var(--glow);
-        }
-
-        header p {
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: var(--text-muted);
-            margin-top: 4px;
-            font-weight: 500;
-        }
-
-        /* Карточки */
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card-title {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 800;
-            font-size: 18px;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .card-title i { color: var(--primary); }
-        .card-subtitle { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.4; }
-
-        /* Загрузка фото */
-        .upload-zone {
-            border: 2px dashed var(--border);
-            border-radius: 14px;
-            padding: 30px 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: rgba(255,255,255,0.01);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .upload-zone:hover, .upload-zone.dragover {
-            border-color: var(--primary);
-            background: rgba(227, 6, 19, 0.03);
-        }
-
-        .upload-zone i { font-size: 32px; color: var(--text-muted); transition: color 0.3s; }
-        .upload-zone:hover i { color: var(--primary); }
-        .upload-zone p { font-size: 14px; font-weight: 500; }
-        .upload-zone span { font-size: 12px; color: var(--text-muted); }
-
-        .preview-container {
-            position: relative;
-            width: 100%;
-            margin-top: 15px;
-            display: none;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-        }
-
-        #imagePreview {
-            width: 100%;
-            display: block;
-            height: auto;
-            max-height: 250px;
-            object-fit: cover;
-        }
-
-        .remove-btn {
-            position: absolute;
-            top: 10px; right: 10px;
-            background: rgba(0, 0, 0, 0.7);
-            border: none; color: white;
-            width: 32px; height: 32px; border-radius: 50%;
-            cursor: pointer; display: flex; align-items: center; justify-content: center;
-            backdrop-filter: blur(4px);
-        }
-        .remove-btn:hover { background: var(--primary); }
-
-        /* Поля ввода */
-        .form-group { margin-bottom: 16px; }
-        .form-group label {
-            display: block; font-size: 12px; font-weight: 600;
-            text-transform: uppercase; letter-spacing: 1px;
-            color: var(--text-muted); margin-bottom: 6px;
-        }
-
-        .input-control {
-            width: 100%; background: var(--bg-input); border: 1px solid var(--border);
-            border-radius: 10px; padding: 14px 16px; color: var(--text-main); font-size: 15px;
-        }
-        .input-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 10px var(--glow); }
-        textarea.input-control { resize: none; height: 90px; }
-
-        .btn {
-            width: 100%; background: var(--primary); color: var(--text-main); border: none;
-            border-radius: 12px; padding: 16px; font-size: 16px; font-weight: 600;
-            cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px;
-            box-shadow: 0 4px 15px rgba(227, 6, 19, 0.3);
-        }
-        .btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
-        .btn:disabled { background: #2c2c35; color: #636366; cursor: not-allowed; transform: none; box-shadow: none; }
-
-        /* --- СТИЛИ ДЛЯ АВТО-СПРАЙТА --- */
-        .price-list { display: flex; flex-direction: column; gap: 20px; margin-top: 15px; }
-        
-        .price-item {
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s ease;
-        }
-        .price-item:hover { transform: translateY(-2px); border-color: #3a3a45; }
-
-        /* Контейнер адаптивной картинки из спрайта */
-        .price-image-container {
-            width: 100%;
-            height: 200px; /* Оптимальная высота для мобильных */
-            overflow: hidden;
-            position: relative;
-            background: #14141c;
-            border-bottom: 1px solid var(--border);
-        }
-
-        /* Сама картинка-спрайт, которой управляет JavaScript */
-        .sprite-frame {
-            position: absolute;
-            left: 0;
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .price-content { padding: 16px; }
-        .price-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
-        .price-title-text { font-size: 16px; font-weight: 600; color: var(--text-main); }
-        .price-tag {
-            font-size: 15px; font-weight: 700; color: var(--primary); white-space: nowrap;
-            background: rgba(227, 6, 19, 0.1); padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(227, 6, 19, 0.2);
-        }
-        .price-description { font-size: 13px; color: var(--text-muted); line-height: 1.4; }
-
-        /* Окна статусов */
-        .overlay-status {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg-card); display: flex; flex-direction: column;
-            align-items: center; justify-content: center; padding: 30px; text-align: center;
-            z-index: 10; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-        }
-        .overlay-status.active { opacity: 1; pointer-events: auto; }
-        .spinner { width: 50px; height: 50px; border: 3px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
-        .success-icon { font-size: 56px; color: #34c759; margin-bottom: 20px; }
-        .status-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 20px; margin-bottom: 10px; }
-        .status-desc { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
-
-        @keyframes spin { to { transform: rotate(360deg); } }
-    </style>
-</head>
-<body>
-
-<div class="wrapper">
+<body data-segment="comfort">
 
     <header>
-        <h1>63<span>регион</span></h1>
-        <p>кузовной центр & детейлинг</p>
+        <div class="header-container">
+            <div class="logo">63 <span>Регион</span></div>
+            <a href="tel:+79277010070" class="phone-btn"><i class="fa-solid fa-phone"></i> Связаться</a>
+        </div>
     </header>
 
-    <div class="card" id="mainCard">
-        <div class="overlay-status" id="statusOverlay">
-            <div id="statusContent">
-                <div class="spinner"></div>
-                <div class="status-title">Отправка данных...</div>
-                <div class="status-desc">Сжимаем фото и формируем защищенный пакет для мастера.</div>
+    <main>
+        <!-- ИНТЕЛЛЕКТУАЛЬНЫЙ МОДУЛЬ: РАСЧЕТ СТОИМОСТИ ПО ФОТО -->
+        <div class="service-card ai-card" id="aiCard">
+            <div class="upload-section" id="uploadSection" onclick="document.getElementById('photoReport').click()">
+                <i class="fa-solid fa-camera-retro"></i>
+                <h4>Оценка стоимости ремонта по фото</h4>
+                <p>Загрузите снимок повреждения. Наш мастер рассчитает цену онлайн</p>
+            </div>
+            
+            <input type="file" id="photoReport" accept="image/*" style="display: none;">
+            
+            <div class="preview-wrapper" id="previewWrapper">
+                <div class="ai-scanner-line" id="scannerLine"></div>
+                <button type="button" class="remove-photo-btn" id="clearPhotoBtn" onclick="removeLoadedPhoto(event)">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <img id="imagePreview" src="#" alt="Повреждение автомобиля">
             </div>
         </div>
 
-        <div class="card-title">
-            <i class="fa-solid fa-camera-retro"></i>
-            <span>Расчет по фото</span>
+        <!-- Переключатель классов обслуживания -->
+        <div class="segment-wrapper">
+            <div class="segment-toggle">
+                <button class="segment-btn active" id="btn-comfort" onclick="setSegment('comfort')">
+                    <i class="fa-solid fa-warehouse"></i> Комфорт-СТО
+                </button>
+                <button class="segment-btn" id="btn-premium" onclick="setSegment('premium')">
+                    <i class="fa-regular fa-gem"></i> Премиум-Детейлинг
+                </button>
+            </div>
         </div>
-        <div class="card-subtitle">Загрузите фото дефекта. Наш мастер рассчитает точную стоимость и свяжется с вами в течение 24 часов.</div>
 
-        <form id="estimationForm">
-            <input type="hidden" name="access_key" value="4f286a75-1aae-49c0-beb2-cf985dfca1f8">
-            <input type="hidden" name="subject" value="Новая заявка на кузовной ремонт - 63 Регион">
-
-            <div class="form-group">
-                <div class="upload-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
-                    <i class="fa-solid fa-cloud-arrow-up"></i>
-                    <p>Сделать или выбрать фото</p>
-                    <span>Автоматически откроет камеру на вашем телефоне</span>
+        <!-- Сетка услуг (Оригинальная структура & разметка спрайта) -->
+        <div class="services-grid">
+            
+            <div class="service-card" onclick="toggleService(this, 'Покраска Бампера')">
+                <div class="card-img img-bumper"></div>
+                <div class="card-content">
+                    <div class="card-title">Покраска Бампера</div>
+                    <div class="card-warning">Разборка / Сборка не включены в стоимость</div>
+                    <ul class="card-features">
+                        <li>Профессиональное нанесение ЛКП</li>
+                        <li>Компьютерный подбор цвета</li>
+                        <li>Сушка в итальянской камере</li>
+                        <li>Гарантия до 1 года</li>
+                    </ul>
+                    <div class="price-box">
+                        <div class="price-label">Стоимость работ</div>
+                        <div class="price-value price-comfort">12 000 – 16 000 ₽</div>
+                        <div class="price-value price-premium">20 000 – 27 000 ₽</div>
+                    </div>
                 </div>
-                <input type="file" id="fileInput" accept="image/*" style="display: none;">
-                
-                <div class="preview-container" id="previewContainer">
-                    <img id="imagePreview" src="#" alt="Превью дефекта">
-                    <button type="button" class="remove-btn" id="removeImageBtn">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
+            </div>
+
+            <div class="service-card" onclick="toggleService(this, 'Покраска Крыла')">
+                <div class="card-img img-fender"></div>
+                <div class="card-content">
+                    <div class="card-title">Покраска Крыла</div>
+                    <div class="card-warning">Разборка / Сборка не включены в стоимость</div>
+                    <ul class="card-features">
+                        <li>Подготовка поверхности</li>
+                        <li>Идеальное попадание в цвет</li>
+                        <li>Нанесение защитного лака</li>
+                        <li>Гарантия до 1 года</li>
+                    </ul>
+                    <div class="price-box">
+                        <div class="price-label">Стоимость работ</div>
+                        <div class="price-value price-comfort">11 000 – 14 000 ₽</div>
+                        <div class="price-value price-premium">17 000 – 24 000 ₽</div>
+                    </div>
                 </div>
             </div>
 
-            <div class="form-group">
-                <label>Ваше имя</label>
-                <input type="text" name="name" class="input-control" placeholder="Александр" required>
+            <div class="service-card" onclick="toggleService(this, 'Окраска под толщиномер')">
+                <div class="card-img img-fender" style="filter: sepia(0.5) hue-rotate(-30deg);"></div>
+                <div class="card-content">
+                    <div class="card-title">Окраска под Толщиномер</div>
+                    <div class="card-warning">Эксклюзивная ювелирная работа (х2.5 цена)</div>
+                    <ul class="card-features">
+                        <li>Сохранение заводских микрон</li>
+                        <li>Полная имитация заводской шагрени</li>
+                        <li>Автомобиль не теряет в цене при продаже</li>
+                    </ul>
+                    <div class="price-box">
+                        <div class="price-label">От базовой стоимости</div>
+                        <div class="price-value price-comfort">от 30 000 ₽ / деталь</div>
+                        <div class="price-value price-premium">от 50 000 ₽ / деталь</div>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label>Телефон (WhatsApp / Telegram)</label>
-                <input type="tel" name="phone" class="input-control" placeholder="+7 (999) 000-00-00" required>
+            <div class="service-card" onclick="toggleService(this, 'Удаление вмятин PDR')">
+                <div class="card-img img-pdr"></div>
+                <div class="card-content">
+                    <div class="card-title">Удаление вмятин PDR</div>
+                    <div class="card-warning">Сохранение оригинальной краски</div>
+                    <ul class="card-features">
+                        <li>Выправление металла без покраски</li>
+                        <li>Ремонт занимает от 1 часа</li>
+                        <li>Отсутствие риска не попасть в цвет</li>
+                    </ul>
+                    <div class="price-box">
+                        <div class="price-label">Стоимость работ</div>
+                        <div class="price-value price-comfort">от 4 500 ₽</div>
+                        <div class="price-value price-premium">от 7 000 ₽</div>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label>Марка и модель авто</label>
-                <input type="text" name="car" class="input-control" placeholder="Лада Веста / Toyota Camry" required>
+            <div class="service-card" onclick="toggleService(this, 'Кузовной ремонт (Стапель)')">
+                <div class="card-img img-stapel"></div>
+                <div class="card-content">
+                    <div class="card-title">Кузовной ремонт (Стапель)</div>
+                    <div class="card-warning">Восстановление после тяжелых ДТП</div>
+                    <ul class="card-features">
+                        <li>Проверка геометрии по контрольным точкам</li>
+                        <li>Вытягивание лонжеронов</li>
+                        <li>Сварочные работы любой сложности</li>
+                    </ul>
+                    <div class="price-box">
+                        <div class="price-label">Стоимость работ</div>
+                        <div class="price-value price-comfort">от 10 000 ₽</div>
+                        <div class="price-value price-premium">от 20 000 ₽</div>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label>Что случилось? (Описание)</label>
-                <textarea name="comment" class="input-control" placeholder="Например: вмятина на крыле, краска не повреждена..."></textarea>
+            <div class="service-card" onclick="toggleService(this, 'Полная полировка')">
+                <div class="card-img img-polish"></div>
+                <div class="card-content">
+                    <div class="card-title">Полная полировка</div>
+                    <div class="card-warning">Возвращаем заводской блеск кузову</div>
+                    <ul class="card-features">
+                        <li>Удаление царапин, "паутинки", голограмм</li>
+                        <li>Многоэтапная абразивная обработка</li>
+                        <li>Подготовка к нанесению керамики</li>
+                    </ul>
+                    <div class="price-box">
+                        <div class="price-label">Стоимость работ</div>
+                        <div class="price-value price-comfort">от 16 000 ₽</div>
+                        <div class="price-value price-premium">от 37 000 ₽</div>
+                    </div>
+                </div>
             </div>
 
-            <button type="submit" class="btn" id="submitBtn" disabled>
-                <i class="fa-solid fa-paper-plane"></i> Отправить мастеру
-            </button>
-        </form>
+            <div class="service-card" onclick="toggleService(this, 'Арматурные работы (Снятие/Сборка)')">
+                <div class="card-img img-armature"></div>
+                <div class="card-content">
+                    <div class="card-title">Арматурные работы</div>
+                    <div class="card-warning">Снятие и установка элементов</div>
+                    <ul class="card-features">
+                        <li>Аккуратный демонтаж бамперов, дверей, фар</li>
+                        <li>Сохранение всех заводских клипс и зазоров</li>
+                        <li>Правильное подключение электрики</li>
+                    </ul>
+                    <div class="price-box">
+                        <div class="price-label">За 1 элемент</div>
+                        <div class="price-value price-comfort">от 4 000 ₽</div>
+                        <div class="price-value price-premium">от 6 500 ₽</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Закрепленная нижняя панель действий -->
+    <div class="booking-bar">
+        <div class="booking-bar-container">
+            <div class="selected-info">
+                Выбрано услуг: <span id="count">0</span>
+            </div>
+            <button class="btn-main" onclick="openModal()">Оформить заявку</button>
+        </div>
     </div>
 
-    <div class="card">
-        <div class="card-title">
-            <i class="fa-solid fa-images"></i>
-            <span>Наши услуги и цены</span>
-        </div>
-        <div class="card-subtitle">Ниже представлены базовые тарифы кузовного цеха на основные виды работ.</div>
-        
-        <div class="price-list">
+    <!-- Модальное окно записи с поддержкой отправки вложений -->
+    <div class="modal" id="bookingModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <h3>Запись на осмотр</h3>
+            <p style="color: var(--text-gray); font-size: 13px; margin-bottom: 20px;">Оставьте контактные данные, и мастер перезвонит вам для подтверждения деталей.</p>
             
-            <div class="price-item">
-                <div class="price-image-container">
-                    <img src="sprite.png" class="sprite-frame" data-frame="0" alt="Покраска">
-                </div>
-                <div class="price-content">
-                    <div class="price-header">
-                        <span class="price-title-text">Высокоточная покраска элемента</span>
-                        <span class="price-tag">от 9 500 ₽</span>
-                    </div>
-                    <p class="price-description">Полная покраска детали в профессиональной камере. В стоимость включены премиальный лак, компьютерный подбор эмали цвет-в-цвет и подготовка элемента.</p>
-                </div>
-            </div>
+            <form action="https://api.web3forms.com/submit" method="POST" id="mainBookingForm">
+                <input type="hidden" name="access_key" value="4f286a75-1aae-49c0-beb2-cf985dfca1f8">
+                <input type="hidden" name="subject" value="Новая комплексная заявка [63 Регион]">
+                <input type="hidden" name="Сегмент" id="hiddenSegment" value="Комфорт-СТО">
+                <input type="hidden" name="Выбранные_услуги" id="hiddenServices">
+                
+                <!-- Сюда в base64 упакуется загруженное фото повреждения -->
+                <input type="hidden" name="Фото_Повреждения_Base64" id="hiddenPhotoBase64">
 
-            <div class="price-item">
-                <div class="price-image-container">
-                    <img src="sprite.png" class="sprite-frame" data-frame="1" alt="Удаление вмятин">
-                </div>
-                <div class="price-content">
-                    <div class="price-header">
-                        <span class="price-title-text">Удаление вмятин без покраски (PDR)</span>
-                        <span class="price-tag">от 2 000 ₽</span>
+                <div class="form-grid">
+                    <div class="form-group full">
+                        <label class="form-label">Ваше имя *</label>
+                        <input type="text" name="Имя" class="form-control" placeholder="Иван" required>
                     </div>
-                    <p class="price-description">Выправление вмятин специальным инструментом с сохранением заводского лакокрасочного покрытия. Идеально для следов от града, легких парковочных повреждений.</p>
-                </div>
-            </div>
-
-            <div class="price-item">
-                <div class="price-image-container">
-                    <img src="sprite.png" class="sprite-frame" data-frame="2" alt="Рихтовка">
-                </div>
-                <div class="price-content">
-                    <div class="price-header">
-                        <span class="price-title-text">Сложная рихтовка и стапель</span>
-                        <span class="price-tag">от 12 000 ₽</span>
+                    
+                    <div class="form-group full">
+                        <label class="form-label">Телефон *</label>
+                        <input type="tel" name="Телефон" class="form-control" placeholder="+7 (999) 000-00-00" required>
                     </div>
-                    <p class="price-description">Восстановление сложной геометрии кузова после серьезных ДТП. Вытягивание лонжеронов, восстановление контрольных заводских точек на профессиональном стапеле.</p>
-                </div>
-            </div>
 
-            <div class="price-item">
-                <div class="price-image-container">
-                    <img src="sprite.png" class="sprite-frame" data-frame="3" alt="Полировка">
-                </div>
-                <div class="price-content">
-                    <div class="price-header">
-                        <span class="price-title-text">Абразивная детейлинг-полировка</span>
-                        <span class="price-tag">от 15 000 ₽</span>
+                    <div class="form-group full">
+                        <label class="form-label">Марка и год авто</label>
+                        <input type="text" name="Автомобиль" class="form-control" placeholder="Например: Kia Rio, 2019">
                     </div>
-                    <p class="price-description">Многоэтапное удаление мелких царапин, паутины и помутнений ЛКП. Возвращает кузову глубокий зеркальный блеск нового автомобиля.</p>
-                </div>
-            </div>
 
+                    <div class="form-group">
+                        <label class="form-label">Желаемая дата</label>
+                        <input type="date" name="Дата" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Время визита</label>
+                        <select name="Время" class="form-control">
+                            <option value="Утро (09:00 - 12:00)">Утро (09:00 - 12:00)</option>
+                            <option value="День (12:00 - 16:00)">День (12:00 - 16:00)</option>
+                            <option value="Вечер (16:00 - 19:00)">Вечер (16:00 - 19:00)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-main" style="width: 100%; margin-top: 10px;">Подтвердить запись</button>
+            </form>
         </div>
     </div>
 
-</div>
+    <script>
+        let selectedServices = [];
+        let currentSegment = 'comfort';
+        let isPhotoAttached = false;
 
-<script>
-    // --- УМНЫЙ СКРИПТ АВТОМАТИЧЕСКОЙ НАРЕЗКИ СПРАЙТА ---
-    function initAutosprite() {
-        const frames = document.querySelectorAll('.sprite-frame');
-        if (frames.length === 0) return;
+        function setSegment(segment) {
+            currentSegment = segment;
+            document.body.setAttribute('data-segment', segment);
+            document.getElementById('btn-comfort').classList.remove('active');
+            document.getElementById('btn-premium').classList.remove('active');
+            document.getElementById(`btn-${segment}`).classList.add('active');
+            document.getElementById('hiddenSegment').value = segment === 'comfort' ? 'Комфорт-СТО' : 'Премиум-Детейлинг';
+        }
 
-        // Создаем тестовое изображение в памяти, чтобы узнать реальные пропорции файла sprite.png
-        const img = new Image();
-        img.src = 'sprite.png';
-        img.onload = function() {
-            // Спрайт состоит из 4-х кадров вертикально
-            const totalFrames = 4; 
+        function toggleService(card, serviceName) {
+            card.classList.toggle('selected');
+            if (card.classList.contains('selected')) { 
+                selectedServices.push(serviceName); 
+            } else { 
+                selectedServices = selectedServices.filter(item => item !== serviceName); 
+            }
+            updateBookingBar();
+        }
+
+        function updateBookingBar() {
+            let countText = selectedServices.length;
+            if (isPhotoAttached) {
+                countText += " (+ Расчет по фото)";
+            }
+            document.getElementById('count').innerText = countText;
+        }
+
+        // --- ЛОГИКА ФОТООЦЕНКИ ---
+        const photoReportInput = document.getElementById('photoReport');
+        const aiCard = document.getElementById('aiCard');
+        const uploadSection = document.getElementById('uploadSection');
+        const previewWrapper = document.getElementById('previewWrapper');
+        const imagePreview = document.getElementById('imagePreview');
+        const scannerLine = document.getElementById('scannerLine');
+        const hiddenPhotoBase64 = document.getElementById('hiddenPhotoBase64');
+
+        photoReportInput.addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                const file = this.files[0];
+                
+                uploadSection.style.display = 'none';
+                previewWrapper.style.display = 'block';
+                scannerLine.style.display = 'block';
+                aiCard.classList.add('file-loaded');
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // Отрисовываем превью для пользователя
+                    imagePreview.src = e.target.result;
+                    
+                    // Сжатие картинки на лету для корректной отправки через Web3Forms
+                    const img = new Image();
+                    img.src = e.target.result;
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        const MAX_WIDTH = 800;
+                        const scale = MAX_WIDTH / img.width;
+                        
+                        canvas.width = img.width > MAX_WIDTH ? MAX_WIDTH : img.width;
+                        canvas.height = img.width > MAX_WIDTH ? img.height * scale : img.height;
+                        
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        
+                        // Сохраняем готовую пережатую строку в скрытое поле формы
+                        hiddenPhotoBase64.value = canvas.toDataURL('image/jpeg', 0.75);
+                        isPhotoAttached = true;
+                        updateBookingBar();
+                        
+                        // Имитация сканирования ИИ
+                        setTimeout(() => {
+                            scannerLine.style.style.borderBottom = "2px solid #34c759";
+                            scannerLine.style.display = 'none';
+                        }, 2500);
+                    };
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function removeLoadedPhoto(event) {
+            event.stopPropagation();
+            photoReportInput.value = '';
+            hiddenPhotoBase64.value = '';
+            previewWrapper.style.display = 'none';
+            scannerLine.style.display = 'none';
+            uploadSection.style.display = 'flex';
+            aiCard.classList.remove('file-loaded');
+            isPhotoAttached = false;
+            updateBookingBar();
+        }
+
+        // --- МОДАЛЬНОЕ ОКНО ---
+        function openModal() {
+            const hiddenInput = document.getElementById('hiddenServices');
+            let serviceSummary = [];
             
-            frames.forEach(frame => {
-                const frameIndex = parseInt(frame.getAttribute('data-frame'));
-                
-                // Рассчитываем точный сдвиг наверх (в процентах от текущей ширины)
-                // Формула вычисляет отношение высоты к ширине одного кадра
-                const frameAspectRatio = (img.height / totalFrames) / img.width;
-                const containerHeight = frame.parentElement.offsetHeight;
-                const currentWidth = frame.parentElement.offsetWidth;
-                
-                // Идеально сдвигаем картинку по вертикали
-                const calculatedTop = -(currentWidth * frameAspectRatio * frameIndex);
-                frame.style.top = calculatedTop + 'px';
-            });
-        };
-    }
-
-    // Запуск нарезки при загрузке страницы и при изменении размеров экрана
-    window.addEventListener('load', initAutosprite);
-    window.addEventListener('resize', initAutosprite);
-
-
-    // --- ЛОГИКА ФОРМЫ (ЗАГРУЗКА И ОТПРАВКА) ---
-    const fileInput = document.getElementById('fileInput');
-    const dropZone = document.getElementById('dropZone');
-    const previewContainer = document.getElementById('previewContainer');
-    const imagePreview = document.getElementById('imagePreview');
-    const removeImageBtn = document.getElementById('removeImageBtn');
-    const submitBtn = document.getElementById('submitBtn');
-    const estimationForm = document.getElementById('estimationForm');
-    const statusOverlay = document.getElementById('statusOverlay');
-    const statusContent = document.getElementById('statusContent');
-
-    let compressedImageBase64 = null;
-
-    fileInput.addEventListener('change', function() {
-        if (this.files && this.files[0]) handleImage(this.files[0]);
-    });
-
-    function handleImage(file) {
-        dropZone.style.display = 'none';
-        previewContainer.style.display = 'block';
-        
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = function(event) {
-            const img = new Image();
-            img.src = event.target.result;
-            img.onload = function() {
-                const canvas = document.createElement('canvas');
-                const MAX_WIDTH = 1000; 
-                const scaleSize = MAX_WIDTH / img.width;
-                
-                canvas.width = img.width > MAX_WIDTH ? MAX_WIDTH : img.width;
-                canvas.height = img.width > MAX_WIDTH ? img.height * scaleSize : img.height;
-                
-                const ctx = canvas.getContext('2d');
-                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                
-                compressedImageBase64 = canvas.toDataURL('image/jpeg', 0.75);
-                imagePreview.src = compressedImageBase64;
-                submitBtn.disabled = false;
+            if (selectedServices.length > 0) {
+                serviceSummary.push("Услуги: " + selectedServices.join(', '));
             }
-        };
-    }
-
-    removeImageBtn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        fileInput.value = '';
-        compressedImageBase64 = null;
-        previewContainer.style.display = 'none';
-        dropZone.style.display = 'flex';
-        submitBtn.disabled = true;
-    });
-
-    // Отправка данных
-    estimationForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        statusOverlay.classList.add('active');
-        
-        const formData = new FormData(estimationForm);
-        const object = Object.fromEntries(formData);
-        if (compressedImageBase64) object["Photo_Attachment_Base64"] = compressedImageBase64; 
-
-        const json = JSON.stringify(object);
-        const apiKey = formData.get("access_key");
-
-        if (apiKey === "YOUR_ACCESS_KEY_HERE" || apiKey === "") {
-            setTimeout(() => {
-                showSuccessScreen("Включен ДЕМО-режим! Чтобы заявки начали приходить на почту, вставьте токен из web3forms.com.");
-            }, 2000);
-            return;
+            if (isPhotoAttached) {
+                serviceSummary.push("Добавлено фото для оценки повреждений");
+            }
+            
+            hiddenInput.value = serviceSummary.length > 0 ? serviceSummary.join(' | ') : "Общий осмотр / Консультация мастера";
+            document.getElementById('bookingModal').classList.add('active');
         }
 
-        try {
-            const response = await fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: json
-            });
-            const result = await response.json();
-            if (response.status === 200) {
-                showSuccessScreen("Заявка успешно доставлена мастеру. Мы свяжемся с вами в течение суток.");
-                estimationForm.reset();
-            } else {
-                throw new Error(result.message || "Ошибка сервера");
-            }
-        } catch (error) {
-            showErrorScreen(error.message);
+        function closeModal() { 
+            document.getElementById('bookingModal').classList.remove('active'); 
         }
-    });
 
-    function showSuccessScreen(description) {
-        statusContent.innerHTML = `
-            <i class="fa-solid fa-circle-check success-icon"></i>
-            <div class="status-title">Заявка принята!</div>
-            <div class="status-desc" style="margin-bottom: 20px;">${description}</div>
-            <button class="btn" onclick="closeOverlay()" style="background: #2c2c35; box-shadow:none;">Вернуться</button>
-        `;
-    }
+        window.onclick = function(event) {
+            const modal = document.getElementById('bookingModal');
+            if (event.target === modal) { closeModal(); }
+        }
 
-    function showErrorScreen(errMsg) {
-        statusContent.innerHTML = `
-            <i class="fa-solid fa-circle-xmark success-icon" style="color:var(--primary);"></i>
-            <div class="status-title">Ошибка отправки</div>
-            <div class="status-desc" style="margin-bottom: 20px;">${errMsg}</div>
-            <button class="btn" onclick="closeOverlay()">Попробовать снова</button>
-        `;
-    }
-
-    function closeOverlay() {
-        statusOverlay.classList.remove('active');
-        setTimeout(() => {
-            statusContent.innerHTML = `
-                <div class="spinner"></div>
-                <div class="status-title">Отправка данных...</div>
-                <div class="status-desc">Сжимаем фото и формируем защищенный пакет для мастера.</div>
-            `;
-            fileInput.value = '';
-            compressedImageBase64 = null;
-            previewContainer.style.display = 'none';
-            dropZone.style.display = 'flex';
-            submitBtn.disabled = true;
-        }, 300);
-    }
-</script>
+        // Перехват отправки для демонстрации Web3Forms, если ключ не заменен
+        document.getElementById('mainBookingForm').addEventListener('submit', function(e) {
+            const apiKey = this.querySelector('input[name="access_key"]').value;
+            if (apiKey === "YOUR_ACCESS_KEY_HERE" || !apiKey) {
+                e.preventDefault();
+                alert("Форма полностью настроена! Чтобы пакет данных и фото уходили на ваш email, замените 'YOUR_ACCESS_KEY_HERE' на ваш рабочий токен от web3forms.com.");
+            }
+        });
+    </script>
 </body>
 </html>
