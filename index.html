@@ -363,6 +363,372 @@
             <div class="price-item">
                 <div class="price-image-sprite img-polish"></div>
                 <div class="price-content">
+                    <div class="price-heade<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>63 РЕГИОН | Кузовное ателье & Детейлинг</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-main: #0c0c0e;
+            --bg-card: #14141c;
+            --bg-input: #1c1c24;
+            --primary: #e30613;
+            --primary-hover: #b8050f;
+            --text-main: #ffffff;
+            --text-muted: #8e8e93;
+            --border: #2c2c35;
+            --glow: rgba(227, 6, 19, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 480px;
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Шапка */
+        header {
+            text-align: center;
+            padding: 20px 0 10px 0;
+        }
+
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 36px;
+            letter-spacing: 2px;
+            color: var(--text-main);
+            text-transform: uppercase;
+        }
+
+        header h1 span {
+            color: var(--primary);
+            text-shadow: 0 0 15px var(--glow);
+        }
+
+        header p {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        /* Карточки */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 18px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title i { color: var(--primary); }
+        .card-subtitle { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.4; }
+
+        /* Загрузка фото */
+        .upload-zone {
+            border: 2px dashed var(--border);
+            border-radius: 14px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.01);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: var(--primary);
+            background: rgba(227, 6, 19, 0.03);
+        }
+
+        .upload-zone i { font-size: 32px; color: var(--text-muted); transition: color 0.3s; }
+        .upload-zone:hover i { color: var(--primary); }
+        .upload-zone p { font-size: 14px; font-weight: 500; }
+        .upload-zone span { font-size: 12px; color: var(--text-muted); }
+
+        .preview-container {
+            position: relative;
+            width: 100%;
+            margin-top: 15px;
+            display: none;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        #imagePreview {
+            width: 100%;
+            display: block;
+            height: auto;
+            max-height: 250px;
+            object-fit: cover;
+        }
+
+        .remove-btn {
+            position: absolute;
+            top: 10px; right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            border: none; color: white;
+            width: 32px; height: 32px; border-radius: 50%;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+        .remove-btn:hover { background: var(--primary); }
+
+        /* Поля ввода */
+        .form-group { margin-bottom: 16px; }
+        .form-group label {
+            display: block; font-size: 12px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px;
+            color: var(--text-muted); margin-bottom: 6px;
+        }
+
+        .input-control {
+            width: 100%; background: var(--bg-input); border: 1px solid var(--border);
+            border-radius: 10px; padding: 14px 16px; color: var(--text-main); font-size: 15px;
+        }
+        .input-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 10px var(--glow); }
+        textarea.input-control { resize: none; height: 90px; }
+
+        .btn {
+            width: 100%; background: var(--primary); color: var(--text-main); border: none;
+            border-radius: 12px; padding: 16px; font-size: 16px; font-weight: 600;
+            cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px;
+            box-shadow: 0 4px 15px rgba(227, 6, 19, 0.3);
+        }
+        .btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
+        .btn:disabled { background: #2c2c35; color: #636366; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        /* --- СТИЛИ ДЛЯ АВТО-СПРАЙТА --- */
+        .price-list { display: flex; flex-direction: column; gap: 20px; margin-top: 15px; }
+        
+        .price-item {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+        .price-item:hover { transform: translateY(-2px); border-color: #3a3a45; }
+
+        /* Контейнер адаптивной картинки из спрайта */
+        .price-image-container {
+            width: 100%;
+            height: 200px; /* Оптимальная высота для мобильных */
+            overflow: hidden;
+            position: relative;
+            background: #14141c;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Сама картинка-спрайт, которой управляет JavaScript */
+        .sprite-frame {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .price-content { padding: 16px; }
+        .price-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
+        .price-title-text { font-size: 16px; font-weight: 600; color: var(--text-main); }
+        .price-tag {
+            font-size: 15px; font-weight: 700; color: var(--primary); white-space: nowrap;
+            background: rgba(227, 6, 19, 0.1); padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(227, 6, 19, 0.2);
+        }
+        .price-description { font-size: 13px; color: var(--text-muted); line-height: 1.4; }
+
+        /* Окна статусов */
+        .overlay-status {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-card); display: flex; flex-direction: column;
+            align-items: center; justify-content: center; padding: 30px; text-align: center;
+            z-index: 10; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+        }
+        .overlay-status.active { opacity: 1; pointer-events: auto; }
+        .spinner { width: 50px; height: 50px; border: 3px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
+        .success-icon { font-size: 56px; color: #34c759; margin-bottom: 20px; }
+        .status-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 20px; margin-bottom: 10px; }
+        .status-desc { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+
+    <header>
+        <h1>63<span>регион</span></h1>
+        <p>кузовной центр & детейлинг</p>
+    </header>
+
+    <div class="card" id="mainCard">
+        <div class="overlay-status" id="statusOverlay">
+            <div id="statusContent">
+                <div class="spinner"></div>
+                <div class="status-title">Отправка данных...</div>
+                <div class="status-desc">Сжимаем фото и формируем защищенный пакет для мастера.</div>
+            </div>
+        </div>
+
+        <div class="card-title">
+            <i class="fa-solid fa-camera-retro"></i>
+            <span>Расчет по фото</span>
+        </div>
+        <div class="card-subtitle">Загрузите фото дефекта. Наш мастер рассчитает точную стоимость и свяжется с вами в течение 24 часов.</div>
+
+        <form id="estimationForm">
+            <input type="hidden" name="access_key" value="4f286a75-1aae-49c0-beb2-cf985dfca1f8">
+            <input type="hidden" name="subject" value="Новая заявка на кузовной ремонт - 63 Регион">
+
+            <div class="form-group">
+                <div class="upload-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <p>Сделать или выбрать фото</p>
+                    <span>Автоматически откроет камеру на вашем телефоне</span>
+                </div>
+                <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                
+                <div class="preview-container" id="previewContainer">
+                    <img id="imagePreview" src="#" alt="Превью дефекта">
+                    <button type="button" class="remove-btn" id="removeImageBtn">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Ваше имя</label>
+                <input type="text" name="name" class="input-control" placeholder="Александр" required>
+            </div>
+
+            <div class="form-group">
+                <label>Телефон (WhatsApp / Telegram)</label>
+                <input type="tel" name="phone" class="input-control" placeholder="+7 (999) 000-00-00" required>
+            </div>
+
+            <div class="form-group">
+                <label>Марка и модель авто</label>
+                <input type="text" name="car" class="input-control" placeholder="Лада Веста / Toyota Camry" required>
+            </div>
+
+            <div class="form-group">
+                <label>Что случилось? (Описание)</label>
+                <textarea name="comment" class="input-control" placeholder="Например: вмятина на крыле, краска не повреждена..."></textarea>
+            </div>
+
+            <button type="submit" class="btn" id="submitBtn" disabled>
+                <i class="fa-solid fa-paper-plane"></i> Отправить мастеру
+            </button>
+        </form>
+    </div>
+
+    <div class="card">
+        <div class="card-title">
+            <i class="fa-solid fa-images"></i>
+            <span>Наши услуги и цены</span>
+        </div>
+        <div class="card-subtitle">Ниже представлены базовые тарифы кузовного цеха на основные виды работ.</div>
+        
+        <div class="price-list">
+            
+            <div class="price-item">
+                <div class="price-image-container">
+                    <img src="sprite.png" class="sprite-frame" data-frame="0" alt="Покраска">
+                </div>
+                <div class="price-content">
+                    <div class="price-header">
+                        <span class="price-title-text">Высокоточная покраска элемента</span>
+                        <span class="price-tag">от 9 500 ₽</span>
+                    </div>
+                    <p class="price-description">Полная покраска детали в профессиональной камере. В стоимость включены премиальный лак, компьютерный подбор эмали цвет-в-цвет и подготовка элемента.</p>
+                </div>
+            </div>
+
+            <div class="price-item">
+                <div class="price-image-container">
+                    <img src="sprite.png" class="sprite-frame" data-frame="1" alt="Удаление вмятин">
+                </div>
+                <div class="price-content">
+                    <div class="price-header">
+                        <span class="price-title-text">Удаление вмятин без покраски (PDR)</span>
+                        <span class="price-tag">от 2 000 ₽</span>
+                    </div>
+                    <p class="price-description">Выправление вмятин специальным инструментом с сохранением заводского лакокрасочного покрытия. Идеально для следов от града, легких парковочных повреждений.</p>
+                </div>
+            </div>
+
+            <div class="price-item">
+                <div class="price-image-container">
+                    <img src="sprite.png" class="sprite-frame" data-frame="2" alt="Рихтовка">
+                </div>
+                <div class="price-content">
+                    <div class="price-header">
+                        <span class="price-title-text">Сложная рихтовка и стапель</span>
+                        <span class="price-tag">от 12 000 ₽</span>
+                    </div>
+                    <p class="price-description">Восстановление сложной геометрии кузова после серьезных ДТП. Вытягивание лонжеронов, восстановление контрольных заводских точек на профессиональном стапеле.</p>
+                </div>
+            </div>
+
+            <div class="price-item">
+                <div class="price-image-container">
+                    <img src="sprite.png" class="sprite-frame" data-frame="3" alt="Полировка">
+                </div>
+                <div class="price-content">
                     <div class="price-header">
                         <span class="price-title-text">Абразивная детейлинг-полировка</span>
                         <span class="price-tag">от 15 000 ₽</span>
@@ -377,6 +743,40 @@
 </div>
 
 <script>
+    // --- УМНЫЙ СКРИПТ АВТОМАТИЧЕСКОЙ НАРЕЗКИ СПРАЙТА ---
+    function initAutosprite() {
+        const frames = document.querySelectorAll('.sprite-frame');
+        if (frames.length === 0) return;
+
+        // Создаем тестовое изображение в памяти, чтобы узнать реальные пропорции файла sprite.png
+        const img = new Image();
+        img.src = 'sprite.png';
+        img.onload = function() {
+            // Спрайт состоит из 4-х кадров вертикально
+            const totalFrames = 4; 
+            
+            frames.forEach(frame => {
+                const frameIndex = parseInt(frame.getAttribute('data-frame'));
+                
+                // Рассчитываем точный сдвиг наверх (в процентах от текущей ширины)
+                // Формула вычисляет отношение высоты к ширине одного кадра
+                const frameAspectRatio = (img.height / totalFrames) / img.width;
+                const containerHeight = frame.parentElement.offsetHeight;
+                const currentWidth = frame.parentElement.offsetWidth;
+                
+                // Идеально сдвигаем картинку по вертикали
+                const calculatedTop = -(currentWidth * frameAspectRatio * frameIndex);
+                frame.style.top = calculatedTop + 'px';
+            });
+        };
+    }
+
+    // Запуск нарезки при загрузке страницы и при изменении размеров экрана
+    window.addEventListener('load', initAutosprite);
+    window.addEventListener('resize', initAutosprite);
+
+
+    // --- ЛОГИКА ФОРМЫ (ЗАГРУЗКА И ОТПРАВКА) ---
     const fileInput = document.getElementById('fileInput');
     const dropZone = document.getElementById('dropZone');
     const previewContainer = document.getElementById('previewContainer');
@@ -429,25 +829,21 @@
         submitBtn.disabled = true;
     });
 
-    // Обработка отправки пакета данных
+    // Отправка данных
     estimationForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         statusOverlay.classList.add('active');
         
         const formData = new FormData(estimationForm);
         const object = Object.fromEntries(formData);
-        
-        if (compressedImageBase64) {
-            object["Photo_Attachment_Base64"] = compressedImageBase64; 
-        }
+        if (compressedImageBase64) object["Photo_Attachment_Base64"] = compressedImageBase64; 
 
         const json = JSON.stringify(object);
         const apiKey = formData.get("access_key");
 
-        // ДЕМО-РЕЖИМ (если нет токена отправки)
         if (apiKey === "YOUR_ACCESS_KEY_HERE" || apiKey === "") {
             setTimeout(() => {
-                showSuccessScreen("Включен ДЕМО-режим! Сайт работает идеально. Чтобы заявки начали приходить на почту, вставьте токен из web3forms.com.");
+                showSuccessScreen("Включен ДЕМО-режим! Чтобы заявки начали приходить на почту, вставьте токен из web3forms.com.");
             }, 2000);
             return;
         }
